@@ -19,15 +19,14 @@ namespace Tests {
         [Test]
         public void RenderRendersTheTemplateWithTheInputData() {
             var template = _factory.GetInstance( "TestTemplate.spark" );
-            template.Model = "replacement string";
-            var result = template.RenderToString();
+            var result = template.Render( "replacement string" );
             Assert.AreEqual( "<output>replacement string</output>", result );
 
         }
 
         [Test]
         public void RenderRendersTheTemplateWithTheInputData2() {
-            var template = new Template();
+            var template = _factory.GetInstance( "TestTemplate.spark" );
             var result = template.Render( "Khaja Minhajuddin" );
             Assert.AreEqual( "<output>Khaja Minhajuddin</output>", result );
 
