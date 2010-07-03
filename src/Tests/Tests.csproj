@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ObjectMother.cs" />
-    <Compile Include="Templating\TemplateTests.cs" />
+    <Compile Include="Templating\TemplateViewTests.cs" />
     <Compile Include="Templating\TemplateFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

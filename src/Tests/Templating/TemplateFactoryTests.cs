@@ -12,7 +12,7 @@ namespace Tests {
 
         [Test]
         public void CanGetATemplateView() {
-            TemplateView view = ObjectMother.TemplateFactory.GetInstance( "TestTemplate.spark" );
+            ITemplateView view = ObjectMother.TemplateFactory.GetInstance( "TestTemplate.spark" );
             var result = view.Render( "test" );
             Assert.AreEqual( "<output>test</output>", result );
 

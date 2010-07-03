@@ -3,7 +3,7 @@ using Spark;
 
 namespace Authnet.Core.Templating {
     public class TemplateFactory {
-        public TemplateView GetInstance( string templateName ) {
+        public ITemplateView GetInstance( string templateName ) {
             // Find the full path to the template file, 
             // using current directory if argument isn't fully qualified
             var templatePath = @"G:\repositories\os\authnet_processor\src\Tests\TestData\TestTemplate.spark";

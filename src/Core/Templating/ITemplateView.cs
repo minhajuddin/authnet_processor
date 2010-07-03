@@ -2,7 +2,8 @@
 using Spark;
 
 namespace Authnet.Core.Templating {
-    public interface ITemplate {
+    public interface ITemplateView {
+        object Model { get; set; }
         string Render( object data );
     }
 }
