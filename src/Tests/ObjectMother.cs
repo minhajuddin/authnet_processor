@@ -8,7 +8,7 @@ namespace Tests {
     internal static class ObjectMother {
         public static TemplateFactory TemplateFactory {
             get {
-                return new TemplateFactory();
+                return new TemplateFactory( @"G:\repositories\os\authnet_processor\src\Tests\TestData\" );
             }
         }
     }
