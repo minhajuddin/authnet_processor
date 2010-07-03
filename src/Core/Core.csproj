@@ -49,7 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templating\TemplateFactory.cs" />
+    <Compile Include="Templating\ITemplate.cs" />
+    <Compile Include="Templating\TemplateView.cs" />
     <Compile Include="Templating\Template.cs" />
   </ItemGroup>
   <ItemGroup>

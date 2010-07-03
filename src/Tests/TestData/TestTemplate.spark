@@ -1,1 +1,1 @@
-﻿<output>${Model}</output>
+﻿<output>${Model.ToString()}</output>
