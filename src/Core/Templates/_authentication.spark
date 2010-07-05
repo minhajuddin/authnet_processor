@@ -1,0 +1,4 @@
+﻿  <merchantAuthentication>
+    <name>${Authentication.ApiLogin}</name>
+    <transactionKey>${Authentication.TransactionKey}</transactionKey>
+  </merchantAuthentication>

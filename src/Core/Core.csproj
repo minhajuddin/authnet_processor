@@ -65,6 +65,8 @@
     <Compile Include="Templating\TemplateView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\_authentication.spark" />
+    <None Include="Templates\createCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileIds.spark" />
   </ItemGroup>
   <ItemGroup>

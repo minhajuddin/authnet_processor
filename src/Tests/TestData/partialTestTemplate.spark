@@ -1,0 +1,2 @@
+﻿<render partial="_partial.spark" />
+<output>${Model.ToString()}</output>

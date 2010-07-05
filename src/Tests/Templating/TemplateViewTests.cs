@@ -31,5 +31,13 @@ namespace Tests {
             Assert.AreEqual( "<output>Khaja Minhajuddin</output>", result );
 
         }
+
+        [Test]
+        public void RenderRendersPartialsProperly() {
+            var template = _factory.GetInstance( "partialTestTemplate.spark" );
+            var result = template.Render( "Khaja Minhajuddin" );
+            Assert.AreEqual( "<auth>Khaja</auth>\r\n<output>Khaja Minhajuddin</output>", result );
+
+        }
     }
 }

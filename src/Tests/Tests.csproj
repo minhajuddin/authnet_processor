@@ -72,6 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="TestData\_partial.spark" />
+    <None Include="TestData\partialTestTemplate.spark" />
     <None Include="TestData\TestTemplate.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

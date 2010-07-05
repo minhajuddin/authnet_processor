@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+  <render partial="_authentication" />
+  <profile>
+    <merchantCustomerId>custId123</merchantCustomerId>
+    <description>some description</description>
+    <email>mark@example.com</email>
+  </profile>
+</createCustomerProfileRequest>
