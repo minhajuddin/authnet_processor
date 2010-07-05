@@ -8,7 +8,7 @@
     <ProjectGuid>{561DB868-A148-4B64-B73A-51A25A7E3FBE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Authnet.Core</RootNamespace>
+    <RootNamespace>Authnet</RootNamespace>
     <AssemblyName>Authnet.Core</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,10 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleLogger.cs" />
     <Compile Include="CustomerInformationManager.cs" />
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Exceptions\ResponseException.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Model\Authentication.cs" />
     <Compile Include="Net\Connection.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />

@@ -22,6 +22,7 @@ namespace Authnet.Core.Net {
         public Connection( string endpoint ) {
             _endPoint = endpoint;
             _encoding = Encoding.UTF8;
+            Logger.Debug( string.Format( "Connecting to {0}", _endPoint ) );
         }
 
         public string Request( string method, string body, IDictionary<string, string> headers ) {
@@ -33,6 +34,7 @@ namespace Authnet.Core.Net {
                     response = httpGet( headers );
                 }
                 else if ( method == "POST" ) {
+                    Logger.Debug( body );
                     response = httpPost( body, headers );
                 }
                 else {
