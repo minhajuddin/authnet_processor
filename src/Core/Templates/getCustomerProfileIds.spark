@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<getCustomerProfileIdsRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+  <merchantAuthentication>
+    <name>${Authentication.ApiLogin}</name>
+    <transactionKey>${Authentication.TransactionKey}</transactionKey>
+  </merchantAuthentication>
+</getCustomerProfileIdsRequest>

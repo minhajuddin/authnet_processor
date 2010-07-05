@@ -13,7 +13,7 @@ namespace Tests {
 
         [SetUp]
         public void Setup() {
-            _factory = ObjectMother.TemplateFactory;
+            _factory = TestHelper.TestTemplateFactory;
         }
 
         [Test]
