@@ -60,11 +60,15 @@
     <Compile Include="Net\Connection.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response.cs" />
     <Compile Include="Templating\TemplateFactory.cs" />
     <Compile Include="Templating\ITemplateView.cs" />
     <Compile Include="Templating\TemplateView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\createCustomerPaymentProfileRequest.spark" />
+    <None Include="Templates\createCustomerProfileTransactionRequest.spark" />
+    <None Include="Templates\createCustomerShippingAddressRequest.spark" />
     <None Include="Templates\_authentication.spark" />
     <None Include="Templates\createCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileIds.spark" />
