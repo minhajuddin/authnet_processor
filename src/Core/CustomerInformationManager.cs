@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Authnet.Core.Net;
-using Authnet.Core.Templating;
-using Authnet.Core.Model;
+using Authnet.Model;
+using Authnet.Net;
+using Authnet.Templating;
 
 namespace Authnet.Core {
     public class CustomerInformationManager : ICustomerInformationManager {
@@ -13,19 +13,19 @@ namespace Authnet.Core {
         TemplateFactory _templateFactory;
         Authentication _authentication;
 
-        public CustomerInformationManager( TemplateFactory templateFactory, Authentication authentication ) {
+        public CustomerInformationManager(TemplateFactory templateFactory, Authentication authentication) {
             _templateFactory = templateFactory;
             _authentication = authentication;
         }
 
         public long[] GetCustomerProfileIds() {
-            var connection = new Connection( _url );
+            var connection = new Connection(_url);
 
-            var template = _templateFactory.GetInstance( "getCustomerProfileIds.spark" );
+            var template = _templateFactory.GetInstance("getCustomerProfileIds.spark");
 
             template.Authentication = _authentication;
-            var response = connection.Request( "post", template.Render( null ), null );
-            Console.WriteLine( response );
+            var response = connection.Request("post", template.Render(null), null);
+            //Console.WriteLine(response);
             return new long[] { };
         }
     }

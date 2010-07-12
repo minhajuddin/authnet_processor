@@ -1,8 +1,9 @@
-﻿using Spark;
+﻿using Authnet.Model;
+using Spark;
 using System.IO;
-using Authnet.Core.Model;
 
-namespace Authnet.Core.Templating {
+namespace Authnet.Templating
+{
     public abstract class TemplateView : AbstractSparkView, ITemplateView {
         public object Model { get; set; }
         public Authentication Authentication { get; set; }

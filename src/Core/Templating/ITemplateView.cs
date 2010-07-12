@@ -1,8 +1,9 @@
-﻿using Spark.FileSystem;
+﻿using Authnet.Model;
+using Spark.FileSystem;
 using Spark;
-using Authnet.Core.Model;
 
-namespace Authnet.Core.Templating {
+namespace Authnet.Templating
+{
     public interface ITemplateView {
         Authentication Authentication { get; set; }
         object Model { get; set; }

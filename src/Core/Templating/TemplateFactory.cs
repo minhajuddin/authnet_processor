@@ -3,7 +3,8 @@ using Spark;
 using System.IO;
 using System;
 
-namespace Authnet.Core.Templating {
+namespace Authnet.Templating
+{
     public class TemplateFactory {
 
         SparkViewEngine _engine;
@@ -19,10 +20,10 @@ namespace Authnet.Core.Templating {
             // Create an engine using the templates path as the root location
             // as well as the shared location
             _engine = new SparkViewEngine
-                             {
-                                 DefaultPageBaseType = typeof( TemplateView ).FullName,
-                                 ViewFolder = viewFolder
-                             };
+                          {
+                              DefaultPageBaseType = typeof( TemplateView ).FullName,
+                              ViewFolder = viewFolder
+                          };
         }
 
         //TODO:should probably cache the compiled views
@@ -30,8 +31,8 @@ namespace Authnet.Core.Templating {
             if ( !File.Exists( Path.Combine( _templateDirectoryPath, templateName ) ) )
                 throw new ArgumentException( string.Format( "The template:{0} does not exist in the directory:{1}", templateName, _templateDirectoryPath ) );
             return ( TemplateView ) _engine.CreateInstance(
-                                  new SparkViewDescriptor()
-                                      .AddTemplate( templateName ) );
+                                        new SparkViewDescriptor()
+                                            .AddTemplate( templateName ) );
         }
     }
 }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Authnet.Templating;
 using NUnit.Framework;
-using Authnet.Core.Templating;
 
 namespace Tests {
     [TestFixture]
@@ -18,25 +18,25 @@ namespace Tests {
 
         [Test]
         public void RenderRendersTheTemplateWithTheInputData() {
-            var template = _factory.GetInstance( "TestTemplate.spark" );
-            var result = template.Render( "replacement string" );
-            Assert.AreEqual( "<output>replacement string</output>", result );
+            var template = _factory.GetInstance("TestTemplate.spark");
+            var result = template.Render("replacement string");
+            Assert.AreEqual("<output>replacement string</output>", result);
 
         }
 
         [Test]
         public void RenderRendersTheTemplateWithTheInputData2() {
-            var template = _factory.GetInstance( "TestTemplate.spark" );
-            var result = template.Render( "Khaja Minhajuddin" );
-            Assert.AreEqual( "<output>Khaja Minhajuddin</output>", result );
+            var template = _factory.GetInstance("TestTemplate.spark");
+            var result = template.Render("Khaja Minhajuddin");
+            Assert.AreEqual("<output>Khaja Minhajuddin</output>", result);
 
         }
 
         [Test]
         public void RenderRendersPartialsProperly() {
-            var template = _factory.GetInstance( "partialTestTemplate.spark" );
-            var result = template.Render( "Khaja Minhajuddin" );
-            Assert.AreEqual( "<auth>Khaja</auth>\r\n<output>Khaja Minhajuddin</output>", result );
+            var template = _factory.GetInstance("partialTestTemplate.spark");
+            var result = template.Render("Khaja Minhajuddin");
+            Assert.AreEqual("<auth>Khaja</auth>\r\n<output>Khaja Minhajuddin</output>", result);
 
         }
     }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Authnet.Templating;
 using NUnit.Framework;
-using Authnet.Core.Templating;
 using System.IO;
 
 namespace Tests {
@@ -12,9 +12,9 @@ namespace Tests {
 
         [Test]
         public void CanGetATemplateView() {
-            ITemplateView view = TestHelper.TestTemplateFactory.GetInstance( "TestTemplate.spark" );
-            var result = view.Render( "test" );
-            Assert.AreEqual( "<output>test</output>", result );
+            ITemplateView view = TestHelper.TestTemplateFactory.GetInstance("TestTemplate.spark");
+            var result = view.Render("test");
+            Assert.AreEqual("<output>test</output>", result);
 
         }
     }
