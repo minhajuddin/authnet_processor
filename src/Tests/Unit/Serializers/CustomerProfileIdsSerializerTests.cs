@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Authnet;
 using NUnit.Framework;
 using System.Xml.Linq;
 
@@ -28,23 +29,23 @@ namespace Tests.Unit.Serializers {
                                 </ids>
                             </getCustomerProfileIdsResponse>";
 
-            var set = serializer.Serialize( rawXml );
+            var set = serializer.Serialize(rawXml);
             Assert.AreEqual("I00001", set["code"].ToString());
-            Assert.AreEqual( "Successful.", set["message"].ToString() );
+            Assert.AreEqual("Successful.", set["message"].ToString());
         }
     }
 
     public class CustomerProfileIdsSerializer {
-        public ParameterSet Serialize( string rawXml ) {
+        public ParameterSet Serialize(string rawXml) {
 
-            var doc = XDocument.Parse( rawXml );
+            var doc = XDocument.Parse(rawXml);
             var set = new ParameterSet();
             XNamespace schema = "AnetApi/xml/v1/schema/AnetApiSchema.xsd";
-            var root = doc.Descendants( schema + "getCustomerProfileIdsResponse" );
-            Console.WriteLine( root );
+            var root = doc.Descendants(schema + "getCustomerProfileIdsResponse");
+            Console.WriteLine(root);
             set["message"] = root.Descendants(schema + "messages").First().Descendants(schema + "text").First().Value;
             set["code"] = root.Descendants(schema + "messages").First().Descendants(schema + "code").First().Value;
-           // set["message"] = root.Descendants(schema + "messages").First().Element("text").ToString();
+            // set["message"] = root.Descendants(schema + "messages").First().Element("text").ToString();
             return set;
         }
     }

@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+#var customer = (Authnet.ICustomer) Model;
 <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
   <render partial="_authentication" />
   <profile>
-    <merchantCustomerId>custId123</merchantCustomerId>
-    <description>some description</description>
-    <email>mark@example.com</email>
+    <merchantCustomerId>${customer.Email}</merchantCustomerId>
+    <description>${customer.Description}</description>
+    <email>${customer.Email}</email>
   </profile>
 </createCustomerProfileRequest>

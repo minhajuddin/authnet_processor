@@ -1,0 +1,4 @@
+#var customer = (Authnet.ICustomer) Model;
+
+<description>${customer.Description}</description>
+<email>${customer.Email}</email>

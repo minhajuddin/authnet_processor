@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using Authnet.Templating;
 using NUnit.Framework;
+using Tests.Integration.Gateways;
 
-namespace Tests {
+namespace Tests.Integration.Templating {
     [TestFixture]
     public class TemplateTests {
 
@@ -38,6 +39,14 @@ namespace Tests {
             var result = template.Render("Khaja Minhajuddin");
             Assert.AreEqual("<auth>Khaja</auth>\r\n<output>Khaja Minhajuddin</output>", result);
 
+        }
+
+        [Test]
+        public void RenderRendersTheTemplateWithTheModelSetToCustomer() {
+            var customer = new Customer { Description = "test profile one", Email = "test@cosmicvent.com" };
+            var templateView = _factory.GetInstance("modelTestTemplate.spark");
+            var result = templateView.Render(customer);
+            Assert.AreEqual("\r\n\r\n<description>test profile one</description>\r\n<email>test@cosmicvent.com</email>", result);
         }
     }
 }

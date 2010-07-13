@@ -59,13 +59,14 @@
   <ItemGroup>
     <Compile Include="Integration\Net\ConnectionTests.cs" />
     <Compile Include="Integration\Gateways\CustomerInformationManagerTests.cs" />
-    <Compile Include="IParameterSet.cs" />
+    <Compile Include="Integration\Templating\CreateCustomerProfileTemplateViewTests.cs" />
     <Compile Include="ObjectMother.cs" />
     <Compile Include="Integration\Templating\TemplateViewTests.cs" />
     <Compile Include="Integration\Templating\TemplateFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spikes.cs" />
     <Compile Include="TestHelper.cs" />
+    <Compile Include="Unit\Serializers\CreateCustomerProfileSerializerTests.cs" />
     <Compile Include="Unit\Serializers\CustomerProfileIdsSerializerTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +76,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="TestData\customerTestTemplate.spark" />
     <None Include="TestData\_partial.spark" />
     <None Include="TestData\partialTestTemplate.spark" />
     <None Include="TestData\TestTemplate.spark" />
