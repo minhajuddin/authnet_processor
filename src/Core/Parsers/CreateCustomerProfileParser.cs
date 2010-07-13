@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Authnet.Serializers {
-    public class CreateCustomerProfileSerializer : ISerializer {
-        public Response Serialize(string rawXml) {
+namespace Authnet.Parsers {
+    public class CreateCustomerProfileParser : IParser {
+        public Response Parse(string rawXml) {
             var response = new Response();
             var set = new ParameterSet();
 

@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Tests.Gateways;
+using Tests.Integration.Gateways;
 
 namespace Tests.Integration.Templating {
     [TestFixture]
@@ -12,8 +12,7 @@ namespace Tests.Integration.Templating {
             template.Authentication = ObjectMother.TestAuthentication;
             var result = template.Render(customer);
 
-            Assert.AreEqual(@"
-<?xml version='1.0' encoding='utf-8'?>
+            Assert.AreEqual(@"<?xml version='1.0' encoding='utf-8'?>
 <createCustomerProfileRequest xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
   <merchantAuthentication>
     <name>YourUserLogin</name>

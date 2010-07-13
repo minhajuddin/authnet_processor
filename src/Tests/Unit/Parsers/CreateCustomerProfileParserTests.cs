@@ -1,12 +1,12 @@
-using Authnet.Serializers;
+using Authnet.Parsers;
 using NUnit.Framework;
 
-namespace Tests.Unit.Serializers {
+namespace Tests.Unit.Parsers {
     [TestFixture]
-    public class CreateCustomerProfileSerializerTests {
+    public class CreateCustomerProfileParserTests {
         [Test]
-        public void CanSerialize() {
-            var serializer = new CreateCustomerProfileSerializer();
+        public void CanParser() {
+            var parser = new CreateCustomerProfileParser();
 
             var rawXml = @"<?xml version='1.0' encoding='utf-8'?>
                            <createCustomerProfileResponse xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
@@ -23,11 +23,11 @@ namespace Tests.Unit.Serializers {
                                 <validationDirectResponseList></validationDirectResponseList>
                             </createCustomerProfileResponse>";
 
-            var serializeResponse = serializer.Serialize(rawXml);
+            var response = parser.Parse(rawXml);
 
-            Assert.AreEqual(true, serializeResponse.Success);
-            Assert.AreEqual("Successful.", serializeResponse.Message);
-            Assert.AreEqual(10000, serializeResponse.ParameterSet["customerProfileId"]);
+            Assert.AreEqual(true, response.Success);
+            Assert.AreEqual("Successful.", response.Message);
+            Assert.AreEqual("10000", response.ParameterSet["customerProfileId"].ToString());
         }
     }
 }

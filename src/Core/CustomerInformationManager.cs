@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Authnet.Model;
 using Authnet.Net;
-using Authnet.Serializers;
+using Authnet.Parsers;
 using Authnet.Templating;
 
 namespace Authnet {
@@ -31,13 +31,13 @@ namespace Authnet {
         }
 
         public Response CreateCustomerProfile(ICustomer customer) {
-            var serializer = new CreateCustomerProfileSerializer();
+            var parser = new CreateCustomerProfileParser();
             var connection = new Connection(_url);
             var template = _templateFactory.GetInstance("createCustomerProfileRequest.spark");
             template.Authentication = _authentication;
             var requestBody = template.Render(customer);
             var response = connection.Request("post", requestBody, null);
-            return serializer.Serialize(response);
+            return parser.Parse(response);
         }
     }
 

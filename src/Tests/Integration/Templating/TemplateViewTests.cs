@@ -46,7 +46,7 @@ namespace Tests.Integration.Templating {
             var customer = new Customer { Description = "test profile one", Email = "test@cosmicvent.com" };
             var templateView = _factory.GetInstance("modelTestTemplate.spark");
             var result = templateView.Render(customer);
-            Assert.AreEqual("\r\n\r\n<description>test profile one</description>\r\n<email>test@cosmicvent.com</email>", result);
+            Assert.AreEqual("\r\n<description>test profile one</description>\r\n<email>test@cosmicvent.com</email>", result);
         }
     }
 }

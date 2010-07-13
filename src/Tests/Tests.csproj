@@ -66,8 +66,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spikes.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="Unit\Serializers\CreateCustomerProfileSerializerTests.cs" />
-    <Compile Include="Unit\Serializers\CustomerProfileIdsSerializerTests.cs" />
+    <Compile Include="Unit\Parsers\CreateCustomerProfileParserTests.cs" />
+    <Compile Include="Unit\Parsers\CustomerProfileIdsParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
@@ -76,7 +76,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TestData\customerTestTemplate.spark" />
+    <None Include="TestData\modelTestTemplate.spark" />
     <None Include="TestData\_partial.spark" />
     <None Include="TestData\partialTestTemplate.spark" />
     <None Include="TestData\TestTemplate.spark" />

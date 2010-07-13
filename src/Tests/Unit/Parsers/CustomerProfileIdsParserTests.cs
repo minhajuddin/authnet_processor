@@ -6,13 +6,12 @@ using Authnet;
 using NUnit.Framework;
 using System.Xml.Linq;
 
-namespace Tests.Unit.Serializers {
-
+namespace Tests.Unit.Parsers {
     [TestFixture]
-    public class CustomerProfileIdsSerializerTests {
+    public class CustomerProfileIdsParserTests {
         [Test]
-        public void CanSerialize() {
-            var serializer = new CustomerProfileIdsSerializer();
+        public void CanParse() {
+            var parser = new CustomerProfileIdsParser();
             var rawXml = @"<?xml version='1.0' encoding='utf-8'?>
                            <getCustomerProfileIdsResponse xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
                                 <messages>
@@ -29,14 +28,14 @@ namespace Tests.Unit.Serializers {
                                 </ids>
                             </getCustomerProfileIdsResponse>";
 
-            var set = serializer.Serialize(rawXml);
+            var set = parser.Parse(rawXml);
             Assert.AreEqual("I00001", set["code"].ToString());
             Assert.AreEqual("Successful.", set["message"].ToString());
         }
     }
 
-    public class CustomerProfileIdsSerializer {
-        public ParameterSet Serialize(string rawXml) {
+    public class CustomerProfileIdsParser {
+        public ParameterSet Parse(string rawXml) {
 
             var doc = XDocument.Parse(rawXml);
             var set = new ParameterSet();
