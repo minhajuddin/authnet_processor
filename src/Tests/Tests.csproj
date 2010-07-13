@@ -67,6 +67,7 @@
     <Compile Include="Spikes.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="Unit\Parsers\CreateCustomerProfileParserTests.cs" />
+    <Compile Include="Unit\Parsers\CreatePaymentProfileParserTests.cs" />
     <Compile Include="Unit\Parsers\CustomerProfileIdsParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
