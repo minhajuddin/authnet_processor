@@ -2,6 +2,7 @@
 using Authnet;
 using Moq;
 using System;
+using System.IO;
 
 namespace Tests {
     internal static class ObjectMother {
@@ -20,6 +21,18 @@ namespace Tests {
             cust.SetupAllProperties();
             constructor(cust.Object);
             return cust.Object;
+        }
+
+        public static string TestDirectory {
+            get {
+                return Path.Combine(Environment.CurrentDirectory, "../../TestData");
+            }
+        }
+
+        public static string TemplateDirectory {
+            get {
+                return Path.Combine(Environment.CurrentDirectory, "../../../Core/Templates");
+            }
         }
     }
 }
