@@ -1,13 +1,12 @@
 ﻿using System;
 using Authnet;
 using NUnit.Framework;
-using Tests.Integration.Templating;
 
 namespace Tests.Integration.Gateways {
     [TestFixture]
     public class CustomerInformationManagerTests {
         ICustomer _customer;
-        Transaction _transaction;
+        ITransaction _transaction;
 
         [SetUp]
         public void Setup() {
@@ -32,20 +31,20 @@ namespace Tests.Integration.Gateways {
 
             var next = random.Next(1, 5000);
 
-            _transaction = new Transaction
+            _transaction = ObjectMother.GetMockTransaction(x =>
             {
-                Amount = next,
-                Description = "Transaction" + next,
-                InVoiceNumber = "IN" + next,
-                PurchaseOrderNumber = "PO" + next,
-                RecurringBilling = false,
-                TaxExempt = false
-            };
+                x.Amount = next;
+                x.Description = "Transaction" + next;
+                x.InVoiceNumber = "IN" + next;
+                x.PurchaseOrderNumber = "PO" + next;
+                x.RecurringBilling = false;
+                x.TaxExempt = false;
+            });
 
         }
 
 
-        [Test]
+        [Test, Ignore("Takes a very long time")]
         public void CanGetAllCustomersIds() {
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
             var ids = cim.GetCustomerProfileIds();

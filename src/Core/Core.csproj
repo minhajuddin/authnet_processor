@@ -54,6 +54,7 @@
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Exceptions\ResponseException.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Gateways\IGateway.cs" />
     <Compile Include="ICustomer.cs" />
     <Compile Include="ICustomerInformationManager.cs" />
     <Compile Include="ILogger.cs" />
@@ -84,7 +85,6 @@
     <None Include="Templates\getCustomerProfileIds.spark" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Gateways\" />
     <Folder Include="Validators\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,7 @@
 using Authnet;
 using NUnit.Framework;
 
-namespace Tests.Unit {
+namespace Tests {
     [TestFixture]
     public class ParameterSetTests {
 

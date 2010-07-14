@@ -7,17 +7,17 @@ namespace Tests.Integration.Templating {
         [Test]
         public void RenderCreateTransactionRequestTemplate() {
 
-            var transaction = new Transaction
+            var transaction = ObjectMother.GetMockTransaction(x =>
                                   {
-                                      Amount = 100,
-                                      Description = "First Transaction",
-                                      InVoiceNumber = "DG43RK",
-                                      PaymentProfileId = "829831",
-                                      ProfileId = "123215",
-                                      PurchaseOrderNumber = "PO1234",
-                                      RecurringBilling = false,
-                                      TaxExempt = false
-                                  };
+                                      x.Amount = 100;
+                                      x.Description = "First Transaction";
+                                      x.InVoiceNumber = "DG43RK";
+                                      x.PaymentProfileId = "829831";
+                                      x.ProfileId = "123215";
+                                      x.PurchaseOrderNumber = "PO1234";
+                                      x.RecurringBilling = false;
+                                      x.TaxExempt = false;
+                                  });
 
             var factory = TestHelper.TemplateFactory;
             var template = factory.GetInstance("CreateTransactionRequest.spark");
@@ -50,45 +50,4 @@ namespace Tests.Integration.Templating {
 
     }
 
-    public class Transaction : ITransaction {
-        public double Amount {
-            get;
-            set;
-        }
-
-        public string ProfileId {
-            get;
-            set;
-        }
-
-        public string PaymentProfileId {
-            get;
-            set;
-        }
-
-        public string InVoiceNumber {
-            get;
-            set;
-        }
-
-        public string Description {
-            get;
-            set;
-        }
-
-        public string PurchaseOrderNumber {
-            get;
-            set;
-        }
-
-        public bool TaxExempt {
-            get;
-            set;
-        }
-
-        public bool RecurringBilling {
-            get;
-            set;
-        }
-    }
 }

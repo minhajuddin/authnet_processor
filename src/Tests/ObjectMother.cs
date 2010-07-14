@@ -17,10 +17,19 @@ namespace Tests {
         }
 
         public static ICustomer GetMockCustomer(Action<ICustomer> constructor) {
-            var cust = new Mock<ICustomer>();
-            cust.SetupAllProperties();
-            constructor(cust.Object);
-            return cust.Object;
+            return GetMock(constructor);
+        }
+
+
+        public static T GetMock<T>(Action<T> constructor) where T : class {
+            var mock = new Mock<T>();
+            mock.SetupAllProperties();
+            constructor(mock.Object);
+            return mock.Object;
+        }
+
+        public static ITransaction GetMockTransaction(Action<ITransaction> constructor) {
+            return GetMock(constructor);
         }
 
         public static string TestDirectory {
