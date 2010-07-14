@@ -12,8 +12,8 @@
         <description>${transaction.Description}</description>
         <purchaseOrderNumber>${transaction.PurchaseOrderNumber}</purchaseOrderNumber>
       </order>
-      <taxExempt>${transaction.TaxExempt}</taxExempt>
-      <recurringBilling>${transaction.RecurringBilling}</recurringBilling>
+      <taxExempt>${transaction.TaxExempt.ToString().ToLower()}</taxExempt>
+      <recurringBilling>${transaction.RecurringBilling.ToString().ToLower()}</recurringBilling>
     </profileTransAuthCapture>
   </transaction>
 </createCustomerProfileTransactionRequest>

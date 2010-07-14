@@ -1,6 +1,7 @@
 ﻿using System;
 using Authnet;
 using NUnit.Framework;
+using Tests.Integration.Templating;
 
 namespace Tests.Integration.Gateways {
     [TestFixture]
@@ -53,6 +54,55 @@ namespace Tests.Integration.Gateways {
 
             Assert.IsTrue(createPaymentProfileResponse.Success);
             Assert.NotNull(createPaymentProfileResponse.ParameterSet["customerPaymentProfileId"].ToString());
+        }
+
+        [Test]
+        public void CanCreatePaymentProfileTransaction() {
+            var random = new Random();
+
+            var next = random.Next(1,5000);
+            var customer = new Customer
+            {
+                Description = "test profile" + next,
+                Email = "test@cosmicvent.com",
+                FirstName = "Rafi",
+                LastName = "Sk",
+                Address = "Rajendranagar",
+                City = "Hyderabad",
+                State = "AP",
+                Zip = "500048",
+                Company = "cosmicvent",
+                Country = "India",
+                CardNumber = "4111111111111111",
+                ExpirationDate = DateTime.Now.AddMonths(1).ToString("yyyy-MM")
+
+            };
+
+            var transaction = new Transaction
+            {
+                Amount = next,
+                Description = "Transaction" + next,
+                InVoiceNumber = "IN" + next,
+                PurchaseOrderNumber = "PO" + next,
+                RecurringBilling = false,
+                TaxExempt = false
+            };
+
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.CreateCustomerProfile(customer);
+
+            var profileid = createProfileResponse.ParameterSet["customerProfileId"];
+            customer.ProfileId = profileid;
+
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(customer);
+
+            transaction.ProfileId = profileid;
+            transaction.PaymentProfileId = createPaymentProfileResponse.ParameterSet["customerPaymentProfileId"].ToString();
+            var createPaymentProfileTransactionResponse = cim.CreateCustomerProfileTransaction(transaction);
+
+
+            Assert.IsTrue(createPaymentProfileTransactionResponse.Success);
+            Assert.NotNull(createPaymentProfileTransactionResponse.ParameterSet["directResponse"].ToString());
         }
 
     }
@@ -126,3 +176,4 @@ namespace Tests.Integration.Gateways {
         }
     }
 }
+

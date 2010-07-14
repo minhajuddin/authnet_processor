@@ -45,5 +45,17 @@ namespace Authnet {
             var response = connection.Request("post", requestBody, null);
             return parser.Parse(response);
         }
+
+        public Response CreateCustomerProfileTransaction(ITransaction transaction) {
+            var parser = new CreatePaymentProfileParser();
+            var connection = new Connection(_url);
+            var template = _templateFactory.GetInstance("CreateTransactionRequest.spark");
+            template.Authentication = _authentication;
+            var requestBody = template.Render(transaction);
+            var response = connection.Request("post", requestBody, null);
+            return parser.Parse(response);
+            
+        }
+
     }
 }
