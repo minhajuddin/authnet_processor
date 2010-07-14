@@ -57,6 +57,7 @@
     <Compile Include="ICustomer.cs" />
     <Compile Include="ICustomerInformationManager.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="ITransaction.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Model\Authentication.cs" />
     <Compile Include="IParameterSet.cs" />
@@ -77,6 +78,7 @@
     <None Include="Templates\createCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\createCustomerProfileTransactionRequest.spark" />
     <None Include="Templates\createCustomerShippingAddressRequest.spark" />
+    <None Include="Templates\CreateTransactionRequest.spark" />
     <None Include="Templates\_authentication.spark" />
     <None Include="Templates\createCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileIds.spark" />

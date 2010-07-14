@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+#var transaction = (Authnet.ITransaction)Model;
+<createCustomerProfileTransactionRequest xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
+  <render partial="_authentication" />
+  <transaction>
+    <profileTransAuthCapture>
+      <amount>${transaction.Amount}</amount>
+      <customerProfileId>${transaction.ProfileId}</customerProfileId>
+      <customerPaymentProfileId>${transaction.PaymentProfileId}</customerPaymentProfileId>
+      <order>
+        <invoiceNumber>${transaction.InVoiceNumber}</invoiceNumber>
+        <description>${transaction.Description}</description>
+        <purchaseOrderNumber>${transaction.PurchaseOrderNumber}</purchaseOrderNumber>
+      </order>
+      <taxExempt>${transaction.TaxExempt}</taxExempt>
+      <recurringBilling>${transaction.RecurringBilling}</recurringBilling>
+    </profileTransAuthCapture>
+  </transaction>
+</createCustomerProfileTransactionRequest>

@@ -2,7 +2,7 @@
 <createCustomerProfileTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
   <render partial="_authentication" />
   <transaction>
-    <profileTransAuthOnly>
+    <profileTransAuthCapture>
       <amount>10.95</amount>
       <tax>
         <amount>1.00</amount>
@@ -41,7 +41,7 @@
       <taxExempt>false</taxExempt>
       <recurringBilling>false</recurringBilling>
       <cardCode>000</cardCode>
-    </profileTransAuthOnly>
+    </profileTransAuthCapture>
   </transaction>
   <extraOptions><![CDATA[x_customer_ip=100.0.0.1&x_authentication_indicator=5&x_cardholder_authentication_value=uq3wDbqt8A26rfANAAAAAP]]></extraOptions>
 </createCustomerProfileTransactionRequest>

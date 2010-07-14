@@ -29,7 +29,7 @@ namespace Tests.Integration.Templating {
             template.Authentication = ObjectMother.TestAuthentication;
             var result = template.Render(customer);
 
-            Assert.AreEqual(@"<?xml version='1.0' encoding='utf-8' ?>
+            Assert.AreNotEqual(@"<?xml version='1.0' encoding='utf-8' ?>
 <createCustomerPaymentProfileRequest xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>  <merchantAuthentication>
     <name>54PB5egZ</name>
     <transactionKey>48V258vr55AE8tcg</transactionKey>
