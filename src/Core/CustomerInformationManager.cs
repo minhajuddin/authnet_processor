@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Authnet.Model;
+﻿using Authnet.Model;
 using Authnet.Net;
 using Authnet.Parsers;
 using Authnet.Templating;
@@ -39,11 +35,15 @@ namespace Authnet {
             var response = connection.Request("post", requestBody, null);
             return parser.Parse(response);
         }
-    }
 
-    public interface ICustomerInformationManager {
-        long[] GetCustomerProfileIds();
-        Response CreateCustomerProfile(ICustomer customer);
-
+        public Response CreatePaymentProfile(ICustomer customer) {
+            var parser = new CreatePaymentProfileParser();
+            var connection = new Connection(_url);
+            var template = _templateFactory.GetInstance("createCustomerPaymentProfileRequest.spark");
+            template.Authentication = _authentication;
+            var requestBody = template.Render(customer);
+            var response = connection.Request("post", requestBody, null);
+            return parser.Parse(response);
+        }
     }
 }

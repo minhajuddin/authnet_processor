@@ -14,7 +14,7 @@ namespace Authnet.Parsers {
             response.Message = root.Descendants(schema + "text").First().Value;
             set["customerPaymentProfileId"] = root.Descendants(schema + "customerPaymentProfileId").First().Value;
             set["validationDirectResponse"] = root.Descendants(schema + "validationDirectResponse").First().Value;
-
+            
             response.ParameterSet = set;
             return response;
         }

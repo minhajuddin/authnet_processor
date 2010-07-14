@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+#var customer = (Authnet.ICustomer)Model;
 <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
   <render partial="_authentication" />
-  <customerProfileId>10000</customerProfileId>
+  <customerProfileId>${customer.ProfileId}</customerProfileId>
   <paymentProfile>
     <billTo>
-      <firstName>John</firstName>
-      <lastName>Doe</lastName>
-      <company></company>
-      <address>123 Main St.</address>
-      <city>Bellevue</city>
-      <state>WA</state>
-      <zip>98004</zip>
-      <country>USA</country>
-      <phoneNumber>000-000-0000</phoneNumber>
-      <faxNumber></faxNumber>
+      <firstName>${customer.FirstName}</firstName>
+      <lastName>${customer.LastName}</lastName>
+      <company>${customer.Company}</company>
+      <address>${customer.Address}</address>
+      <city>${customer.City}</city>
+      <state>${customer.State}</state>
+      <zip>${customer.Zip}</zip>
+      <country>${customer.Country}</country>
+      <phoneNumber>${customer.PhoneNumber}</phoneNumber>
+      <faxNumber>${customer.FaxNumber}</faxNumber>
     </billTo>
     <payment>
       <creditCard>
-        <cardNumber>4111111111111111</cardNumber>
-        <expirationDate>2023-12</expirationDate>
+        <cardNumber>${customer.CardNumber}</cardNumber>
+        <expirationDate>${customer.ExpirationDate}</expirationDate>
       </creditCard>
     </payment>
   </paymentProfile>
