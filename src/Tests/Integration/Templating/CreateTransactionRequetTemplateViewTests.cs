@@ -1,4 +1,3 @@
-using System;
 using Authnet;
 using NUnit.Framework;
 

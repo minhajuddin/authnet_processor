@@ -1,6 +1,5 @@
 using System;
 using NUnit.Framework;
-using Tests.Integration.Gateways;
 
 namespace Tests.Integration.Templating {
     [TestFixture]

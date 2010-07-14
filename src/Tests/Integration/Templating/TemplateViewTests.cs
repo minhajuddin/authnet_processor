@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Authnet.Templating;
+﻿using Authnet.Templating;
 using NUnit.Framework;
-using Tests.Integration.Gateways;
 
 namespace Tests.Integration.Templating {
     [TestFixture]
