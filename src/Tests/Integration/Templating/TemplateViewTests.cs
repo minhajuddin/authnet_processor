@@ -43,7 +43,12 @@ namespace Tests.Integration.Templating {
 
         [Test]
         public void RenderRendersTheTemplateWithTheModelSetToCustomer() {
-            var customer = new Customer { Description = "test profile one", Email = "test@cosmicvent.com" };
+            var customer = ObjectMother.GetMockCustomer(x =>
+            {
+                x.Description = "test profile";
+                x.Email = "test2@cosmicvent.com";
+            });
+
             var templateView = _factory.GetInstance("modelTestTemplate.spark");
             var result = templateView.Render(customer);
             Assert.AreEqual("\r\n<description>test profile one</description>\r\n<email>test@cosmicvent.com</email>", result);

@@ -6,35 +6,33 @@ using Tests.Integration.Templating;
 namespace Tests.Integration.Gateways {
     [TestFixture]
     public class CustomerInformationManagerTests {
-        private Customer customer;
-        private Transaction transaction;
+        ICustomer _customer;
+        Transaction _transaction;
+
         [SetUp]
         public void Setup() {
 
             var random = new Random();
-            customer = new Customer
-            {
-                Description = "test profile" + random.Next(),
-                Email = "test@cosmicvent.com",
-                FirstName = "Rafi",
-                LastName = "Sk",
-                Address = "Rajendranagar",
-                City = "Hyderabad",
-                State = "AP",
-                Zip = "500048",
-                Company = "cosmicvent",
-                Country = "India",
-                CardNumber = "4111111111111111",
-                ExpirationDate = DateTime.Now.AddMonths(1).ToString("yyyy-MM")
+            _customer = ObjectMother.GetMockCustomer();
 
-            };
 
+            _customer.Description = "test profile" + random.Next();
+            _customer.Email = "test@cosmicvent.com";
+            _customer.FirstName = "Rafi";
+            _customer.LastName = "Sk";
+            _customer.Address = "Rajendranagar";
+            _customer.City = "Hyderabad";
+            _customer.State = "AP";
+            _customer.Zip = "500048";
+            _customer.Company = "cosmicvent";
+            _customer.Country = "India";
+            _customer.CardNumber = "4111111111111111";
+            _customer.ExpirationDate = DateTime.Now.AddMonths(1).ToString("yyyy-MM");
 
 
             var next = random.Next(1, 5000);
 
-
-            transaction = new Transaction
+            _transaction = new Transaction
             {
                 Amount = next,
                 Description = "Transaction" + next,
@@ -58,7 +56,11 @@ namespace Tests.Integration.Gateways {
         [Test]
         public void CanCreateCustomerProfile() {
             var random = new Random();
-            var customer = new Customer { Description = "test profile" + random.Next(), Email = "test2@cosmicvent.com" };
+            var customer = ObjectMother.GetMockCustomer(x =>
+                                                            {
+                                                                x.Description = "test profile" + random.Next();
+                                                                x.Email = "test2@cosmicvent.com";
+                                                            });
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
             var response = cim.CreateCustomerProfile(customer);
             Assert.IsTrue(response.Success);
@@ -68,11 +70,11 @@ namespace Tests.Integration.Gateways {
         [Test]
         public void CanCreatePaymentProfile() {
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createProfileResponse = cim.CreateCustomerProfile(customer);
+            var createProfileResponse = cim.CreateCustomerProfile(_customer);
 
-            customer.ProfileId = createProfileResponse.ParameterSet["customerProfileId"];
+            _customer.ProfileId = createProfileResponse.ParameterSet["customerProfileId"];
 
-            var createPaymentProfileResponse = cim.CreatePaymentProfile(customer);
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_customer);
 
 
             Assert.IsTrue(createPaymentProfileResponse.Success);
@@ -83,16 +85,16 @@ namespace Tests.Integration.Gateways {
         public void CanCreatePaymentProfileTransaction() {
 
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createProfileResponse = cim.CreateCustomerProfile(customer);
+            var createProfileResponse = cim.CreateCustomerProfile(_customer);
 
             var profileid = createProfileResponse.ParameterSet["customerProfileId"];
-            customer.ProfileId = profileid;
+            _customer.ProfileId = profileid;
 
-            var createPaymentProfileResponse = cim.CreatePaymentProfile(customer);
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_customer);
 
-            transaction.ProfileId = profileid;
-            transaction.PaymentProfileId = createPaymentProfileResponse.ParameterSet["customerPaymentProfileId"].ToString();
-            var createPaymentProfileTransactionResponse = cim.CreateCustomerProfileTransaction(transaction);
+            _transaction.ProfileId = profileid;
+            _transaction.PaymentProfileId = createPaymentProfileResponse.ParameterSet["customerPaymentProfileId"].ToString();
+            var createPaymentProfileTransactionResponse = cim.CreateCustomerProfileTransaction(_transaction);
 
 
             Assert.IsTrue(createPaymentProfileTransactionResponse.Success);
@@ -101,73 +103,5 @@ namespace Tests.Integration.Gateways {
 
     }
 
-    public class Customer : ICustomer {
-        public string ProfileId {
-            get;
-            set;
-        }
-
-        public string Description { get; set; }
-        public string Email { get; set; }
-        public string FirstName {
-            get;
-            set;
-        }
-
-        public string LastName {
-            get;
-            set;
-        }
-
-        public string Company {
-            get;
-            set;
-        }
-
-        public string Address {
-            get;
-            set;
-        }
-
-        public string City {
-            get;
-            set;
-        }
-
-        public string State {
-            get;
-            set;
-        }
-
-        public string Zip {
-            get;
-            set;
-        }
-
-        public string Country {
-            get;
-            set;
-        }
-
-        public string PhoneNumber {
-            get;
-            set;
-        }
-
-        public string FaxNumber {
-            get;
-            set;
-        }
-
-        public string CardNumber {
-            get;
-            set;
-        }
-
-        public string ExpirationDate {
-            get;
-            set;
-        }
-    }
 }
 

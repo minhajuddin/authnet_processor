@@ -8,22 +8,21 @@ namespace Tests.Integration.Templating {
         [Test]
         public void RenderCreatePaymentProfileTemplate() {
 
-            var customer = new Customer
+            var customer = ObjectMother.GetMockCustomer(x =>
                                {
-                                   Description = "test profile one",
-                                   Email = "test@cosmicvent.com",
-                                   FirstName = "Rafi",
-                                   LastName = "Sk",
-                                   Address = "Rajendranagar",
-                                   City = "Hyderabad",
-                                   State = "AP",
-                                   Zip = "500048",
-                                   Company = "cosmicvent",
-                                   Country = "India",
-                                   CardNumber = "4111111111111111",
-                                   ExpirationDate = new DateTime(2010, 07, 14).ToString("yyyy-MM")
-
-                               };
+                                   x.Description = "test profile one";
+                                   x.Email = "test@cosmicvent.com";
+                                   x.FirstName = "Rafi";
+                                   x.LastName = "Sk";
+                                   x.Address = "Rajendranagar";
+                                   x.City = "Hyderabad";
+                                   x.State = "AP";
+                                   x.Zip = "500048";
+                                   x.Company = "cosmicvent";
+                                   x.Country = "India";
+                                   x.CardNumber = "4111111111111111";
+                                   x.ExpirationDate = new DateTime(2010, 07, 14).ToString("yyyy-MM");
+                               });
             var factory = TestHelper.TemplateFactory;
             var template = factory.GetInstance("createCustomerPaymentProfileRequest.spark");
             template.Authentication = ObjectMother.TestAuthentication;

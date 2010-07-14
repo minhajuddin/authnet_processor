@@ -6,7 +6,11 @@ namespace Tests.Integration.Templating {
     public class CreateCustomerProfileTemplateViewTests {
         [Test]
         public void Render_RenderCreateCustomerProfileTemplateView_ProvidedCustomer() {
-            var customer = new Customer { Description = "test profile one", Email = "test@cosmicvent.com" };
+            var customer = ObjectMother.GetMockCustomer(x =>
+                                                            {
+                                                                x.Description = "test profile";
+                                                                x.Email = "test2@cosmicvent.com";
+                                                            });
             var factory = TestHelper.TemplateFactory;
             var template = factory.GetInstance("createCustomerProfileRequest.spark");
             template.Authentication = ObjectMother.TestAuthentication;
