@@ -1,5 +1,3 @@
-using System;
-
 namespace Authnet {
     public interface ICustomer {
         string ProfileId { get; set; }

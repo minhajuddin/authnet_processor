@@ -1,9 +1,7 @@
 using System.Linq;
 using System.Xml.Linq;
-using Authnet;
-using Authnet.Parsers;
 
-namespace Tests.Unit.Parsers {
+namespace Authnet.Parsers {
     public class CreateCustomerProfileTransactionParser : IParser {
         public Response Parse(string rawXml) {
             var response = new Response();
