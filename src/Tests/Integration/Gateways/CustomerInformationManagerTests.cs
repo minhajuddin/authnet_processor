@@ -6,6 +6,47 @@ using Tests.Integration.Templating;
 namespace Tests.Integration.Gateways {
     [TestFixture]
     public class CustomerInformationManagerTests {
+        private Customer customer;
+        private Transaction transaction;
+        [SetUp]
+        public void Setup() {
+
+            var random = new Random();
+            customer = new Customer
+            {
+                Description = "test profile" + random.Next(),
+                Email = "test@cosmicvent.com",
+                FirstName = "Rafi",
+                LastName = "Sk",
+                Address = "Rajendranagar",
+                City = "Hyderabad",
+                State = "AP",
+                Zip = "500048",
+                Company = "cosmicvent",
+                Country = "India",
+                CardNumber = "4111111111111111",
+                ExpirationDate = DateTime.Now.AddMonths(1).ToString("yyyy-MM")
+
+            };
+
+
+
+            var next = random.Next(1, 5000);
+
+
+            transaction = new Transaction
+            {
+                Amount = next,
+                Description = "Transaction" + next,
+                InVoiceNumber = "IN" + next,
+                PurchaseOrderNumber = "PO" + next,
+                RecurringBilling = false,
+                TaxExempt = false
+            };
+
+        }
+
+
         [Test]
         public void CanGetAllCustomersIds() {
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
@@ -26,24 +67,6 @@ namespace Tests.Integration.Gateways {
 
         [Test]
         public void CanCreatePaymentProfile() {
-            var random = new Random();
-            var customer = new Customer
-                               {
-                                   Description = "test profile" + random.Next(),
-                                   Email = "test@cosmicvent.com",
-                                   FirstName = "Rafi",
-                                   LastName = "Sk",
-                                   Address = "Rajendranagar",
-                                   City = "Hyderabad",
-                                   State = "AP",
-                                   Zip = "500048",
-                                   Company = "cosmicvent",
-                                   Country = "India",
-                                   CardNumber = "4111111111111111",
-                                   ExpirationDate = DateTime.Now.AddMonths(1).ToString("yyyy-MM")
-
-                               };
-
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
             var createProfileResponse = cim.CreateCustomerProfile(customer);
 
@@ -58,35 +81,6 @@ namespace Tests.Integration.Gateways {
 
         [Test]
         public void CanCreatePaymentProfileTransaction() {
-            var random = new Random();
-
-            var next = random.Next(1,5000);
-            var customer = new Customer
-            {
-                Description = "test profile" + next,
-                Email = "test@cosmicvent.com",
-                FirstName = "Rafi",
-                LastName = "Sk",
-                Address = "Rajendranagar",
-                City = "Hyderabad",
-                State = "AP",
-                Zip = "500048",
-                Company = "cosmicvent",
-                Country = "India",
-                CardNumber = "4111111111111111",
-                ExpirationDate = DateTime.Now.AddMonths(1).ToString("yyyy-MM")
-
-            };
-
-            var transaction = new Transaction
-            {
-                Amount = next,
-                Description = "Transaction" + next,
-                InVoiceNumber = "IN" + next,
-                PurchaseOrderNumber = "PO" + next,
-                RecurringBilling = false,
-                TaxExempt = false
-            };
 
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
             var createProfileResponse = cim.CreateCustomerProfile(customer);
