@@ -24,8 +24,9 @@ namespace Tests.Integration.Templating {
             var template = factory.GetInstance("CreateTransactionRequest.spark");
             template.Authentication = ObjectMother.TestAuthentication;
             var result = template.Render(transaction);
-            Assert.AreEqual(@"<?xml version='1.0' encoding='utf-8' ?>
-<createCustomerProfileTransactionRequest xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>  <merchantAuthentication>
+            var expectedXml =
+                @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+<createCustomerProfileTransactionRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">  <merchantAuthentication>
     <name>54PB5egZ</name>
     <transactionKey>48V258vr55AE8tcg</transactionKey>
   </merchantAuthentication>
@@ -39,12 +40,12 @@ namespace Tests.Integration.Templating {
         <description>First Transaction</description>
         <purchaseOrderNumber>PO1234</purchaseOrderNumber>
       </order>
-      <taxExempt>False</taxExempt>
-      <recurringBilling>False</recurringBilling>
+      <taxExempt>false</taxExempt>
+      <recurringBilling>false</recurringBilling>
     </profileTransAuthCapture>
   </transaction>
-</createCustomerProfileTransactionRequest>", result);
-
+</createCustomerProfileTransactionRequest>";
+            Assert.AreEqual(expectedXml, result);
 
         }
 

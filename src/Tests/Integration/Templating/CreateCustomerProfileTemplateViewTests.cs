@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Tests.Integration.Gateways;
 
 namespace Tests.Integration.Templating {
     [TestFixture]
@@ -16,18 +15,19 @@ namespace Tests.Integration.Templating {
             template.Authentication = ObjectMother.TestAuthentication;
             var result = template.Render(customer);
 
-            Assert.AreEqual(@"<?xml version='1.0' encoding='utf-8'?>
-<createCustomerProfileRequest xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
-  <merchantAuthentication>
-    <name>YourUserLogin</name>
-    <transactionKey>YourTranKey</transactionKey>
+            var expectedXml =
+                @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+<createCustomerProfileRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">  <merchantAuthentication>
+    <name>54PB5egZ</name>
+    <transactionKey>48V258vr55AE8tcg</transactionKey>
   </merchantAuthentication>
   <profile>
-    <merchantCustomerId>test@cosmicvent.com</merchantCustomerId>
-    <description>test profile one</description>
-    <email>test@cosmicvent.com</email>
+    <merchantCustomerId>test2@cosmicvent.com</merchantCustomerId>
+    <description>test profile</description>
+    <email>test2@cosmicvent.com</email>
   </profile>
-</createCustomerProfileRequest>", result);
+</createCustomerProfileRequest>";
+            Assert.AreEqual(expectedXml, result);
 
         }
     }

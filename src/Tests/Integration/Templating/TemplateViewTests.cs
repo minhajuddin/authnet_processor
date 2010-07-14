@@ -51,7 +51,7 @@ namespace Tests.Integration.Templating {
 
             var templateView = _factory.GetInstance("modelTestTemplate.spark");
             var result = templateView.Render(customer);
-            Assert.AreEqual("\r\n<description>test profile one</description>\r\n<email>test@cosmicvent.com</email>", result);
+            Assert.AreEqual("\r\n<description>test profile</description>\r\n<email>test2@cosmicvent.com</email>", result);
         }
     }
 }
