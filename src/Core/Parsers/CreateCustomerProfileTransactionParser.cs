@@ -2,19 +2,14 @@ using System.Linq;
 using System.Xml.Linq;
 
 namespace Authnet.Parsers {
-    public class CreateCustomerProfileTransactionParser : IParser {
+    public class CreateCustomerProfileTransactionParser : ParserBase, IParser {
         public Response Parse(string rawXml) {
-            var response = new Response();
-            var set = new Hash();
 
             var doc = XDocument.Parse(rawXml);
-            XNamespace schema = "AnetApi/xml/v1/schema/AnetApiSchema.xsd";
-            var root = doc.Descendants(schema + "createCustomerProfileTransactionResponse");
-            response.ResultCode = root.Descendants(schema + "resultCode").First().Value;
-            response.Message = root.Descendants(schema + "text").First().Value;
-            set["directResponse"] = root.Descendants(schema + "directResponse").First().Value;
+            var root = doc.Descendants(_namespace + "createCustomerProfileTransactionResponse");
+            var response = GetBasicResponse(root);
+            response.Params["directResponse"] = root.Descendants(_namespace + "directResponse").First().Value;
 
-            response.Params = set;
             return response;
         }
     }

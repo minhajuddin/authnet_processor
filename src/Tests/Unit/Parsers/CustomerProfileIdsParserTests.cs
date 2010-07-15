@@ -29,6 +29,7 @@ namespace Tests.Unit.Parsers {
             var set = parser.Parse(rawXml);
             Assert.AreEqual("I00001", set["code"].ToString());
             Assert.AreEqual("Successful.", set["message"].ToString());
+
         }
     }
 

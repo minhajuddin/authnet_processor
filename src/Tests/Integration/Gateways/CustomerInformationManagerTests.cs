@@ -1,5 +1,6 @@
 ﻿using System;
 using Authnet;
+using Authnet.Gateways;
 using NUnit.Framework;
 
 namespace Tests.Integration.Gateways {

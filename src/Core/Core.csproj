@@ -50,16 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleLogger.cs" />
-    <Compile Include="CustomerInformationManager.cs" />
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Exceptions\ResponseException.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="GatewayBase.cs" />
+    <Compile Include="Gateways\CustomerInformationManager.cs" />
+    <Compile Include="Gateways\Gateway.cs" />
+    <Compile Include="Gateways\ICustomerInformationManager.cs" />
     <Compile Include="Gateways\IGateway.cs" />
     <Compile Include="ICreditCardAttributes.cs" />
     <Compile Include="ICustomer.cs" />
     <Compile Include="IAddressAttributes.cs" />
-    <Compile Include="ICustomerInformationManager.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IOrder.cs" />
     <Compile Include="IPaymentProfileAttributes.cs" />
@@ -70,9 +71,9 @@
     <Compile Include="Hash.cs" />
     <Compile Include="Net\Connection.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Parsers\CreateCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\CreateCustomerProfileTransactionParser.cs" />
-    <Compile Include="Parsers\CreateCustomerShippingParser.cs" />
-    <Compile Include="Parsers\CreatePaymentProfileParser.cs" />
+    <Compile Include="Parsers\CreateCustomerShippingAddressParser.cs" />
     <Compile Include="Parsers\ParserBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
@@ -86,7 +87,6 @@
     <None Include="Templates\createCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\createCustomerProfileTransactionRequest.spark" />
     <None Include="Templates\createCustomerShippingAddressRequest.spark" />
-    <None Include="Templates\CreateTransactionRequest.spark" />
     <None Include="Templates\_authentication.spark" />
     <None Include="Templates\createCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileIds.spark" />
