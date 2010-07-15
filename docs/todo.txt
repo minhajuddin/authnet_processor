@@ -1,0 +1,5 @@
+> Naming conventions throughout the project
+> CIM >> remove duplication in all the methods by creating an internal generic method
+> Extract base parser
+> Cleanup the tests (move expected xml to object mother)
+> Validation

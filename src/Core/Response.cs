@@ -1,6 +1,9 @@
 ﻿namespace Authnet {
     public class Response : IResponse {
 
+        public Response() {
+            ParameterSet = new ParameterSet();
+        }
         public bool Success {
             get {
                 return ResultCode == "Ok" ? true : false;
