@@ -71,6 +71,7 @@
     <Compile Include="TestHelper.cs" />
     <Compile Include="Unit\Parsers\CreateCustomerProfileParserTests.cs" />
     <Compile Include="Unit\Parsers\CreateCustomerProfileTransactionParserTests.cs" />
+    <Compile Include="Unit\Parsers\CreateCustomerShippingParserTests.cs" />
     <Compile Include="Unit\Parsers\CreatePaymentProfileParserTests.cs" />
     <Compile Include="Unit\Parsers\CustomerProfileIdsParserTests.cs" />
   </ItemGroup>
