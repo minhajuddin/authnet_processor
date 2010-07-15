@@ -60,6 +60,7 @@
     <Compile Include="Integration\Net\ConnectionTests.cs" />
     <Compile Include="Integration\Gateways\CustomerInformationManagerTests.cs" />
     <Compile Include="Integration\Templating\CreateCustomerProfileTemplateViewTests.cs" />
+    <Compile Include="Integration\Templating\CreateCustomerShippingAddressTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\CreatePaymentProfileTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\CreateTransactionRequetTemplateViewTests.cs" />
     <Compile Include="ObjectMother.cs" />

@@ -46,6 +46,16 @@ namespace Authnet {
             return parser.Parse(response);
         }
 
+        public Response CreateCustomerShippingAddress(ICustomerAddress customerAddress) {
+            var parser = new CreatePaymentProfileParser();
+            var connection = new Connection(_url);
+            var template = _templateFactory.GetInstance("createCustomerShippingAddressRequest.spark");
+            template.Authentication = _authentication;
+            var requestBody = template.Render(customerAddress);
+            var response = connection.Request("post", requestBody, null);
+            return parser.Parse(response);
+        }
+
         //TODO:This needs to go to IGateway
         public Response CreateCustomerProfileTransaction(ITransaction transaction) {
             var parser = new CreatePaymentProfileParser();
@@ -60,3 +70,4 @@ namespace Authnet {
 
     }
 }
+

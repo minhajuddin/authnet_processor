@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+#var shippingAddress = (Authnet.ICustomerAddress)Model;
 <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
   <render partial="_authentication" />
-  <customerProfileId>10000</customerProfileId>
+  <customerProfileId>${shippingAddress.ProfileId}</customerProfileId>
   <address>
-    <firstName>John</firstName>
-    <lastName>Doe</lastName>
-    <company></company>
-    <address>123 Main St.</address>
-    <city>Bellevue</city>
-    <state>WA</state>
-    <zip>98004</zip>
-    <country>USA</country>
-    <phoneNumber>000-000-0000</phoneNumber>
-    <faxNumber></faxNumber>
+    <firstName>${shippingAddress.FirstName}</firstName>
+    <lastName>${shippingAddress.LastName}</lastName>
+    <company>${shippingAddress.Company}</company>
+    <address>${shippingAddress.Address}</address>
+    <city>${shippingAddress.City}</city>
+    <state>${shippingAddress.State}</state>
+    <zip>${shippingAddress.Zip}</zip>
+    <country>${shippingAddress.Country}</country>
+    <phoneNumber>${shippingAddress.PhoneNumber}</phoneNumber>
+    <faxNumber>${shippingAddress.FaxNumber}</faxNumber>
   </address>
 </createCustomerShippingAddressRequest>

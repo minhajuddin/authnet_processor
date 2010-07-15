@@ -1,3 +1,4 @@
+using Authnet.Parsers;
 using NUnit.Framework;
 
 namespace Tests.Unit.Parsers {

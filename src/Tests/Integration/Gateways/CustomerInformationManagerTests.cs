@@ -100,6 +100,32 @@ namespace Tests.Integration.Gateways {
             Assert.NotNull(createPaymentProfileTransactionResponse.ParameterSet["directResponse"].ToString());
         }
 
+        [Test]
+        public void CanCreateCustomerShippingAddress() {
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            //var createProfileResponse = cim.CreateCustomerProfile(_customer);
+
+            var customerAddress = ObjectMother.GetMockCustomerAddress(x =>
+            {
+                var random = new Random();
+                x.FirstName = "Rafi" + random.Next(1,5000);
+                x.LastName = "Sk";
+                x.Address = "Rajendranagar";
+                x.City = "Hyderabad";
+                x.State = "AP";
+                x.Zip = "500048";
+                x.Company = "cosmicvent";
+                x.Country = "India";
+                x.PhoneNumber = "9951313930";
+                x.ProfileId = "1947922";
+            });
+
+            //customerAddress.ProfileId = createProfileResponse.ParameterSet["customerProfileId"];
+            var createShippingAddressResponse = cim.CreateCustomerShippingAddress(customerAddress);
+            Assert.IsTrue(createShippingAddressResponse.Success);
+            Assert.NotNull(createShippingAddressResponse.ParameterSet["customerAddressId"].ToString());
+        }
+
     }
 
 }

@@ -10,16 +10,17 @@ namespace Tests {
             get { return new Authentication("54PB5egZ", "48V258vr55AE8tcg"); }
         }
 
-        public static ICustomer GetMockCustomer() {
-            var cust = new Mock<ICustomer>();
-            cust.SetupAllProperties();
-            return cust.Object;
-        }
-
         public static ICustomer GetMockCustomer(Action<ICustomer> constructor) {
             return GetMock(constructor);
         }
 
+        public static ITransaction GetMockTransaction(Action<ITransaction> constructor) {
+            return GetMock(constructor);
+        }
+
+        public static ICustomerAddress GetMockCustomerAddress(Action<ICustomerAddress> constructor) {
+            return GetMock(constructor);
+        }
 
         public static T GetMock<T>(Action<T> constructor) where T : class {
             var mock = new Mock<T>();
@@ -28,8 +29,10 @@ namespace Tests {
             return mock.Object;
         }
 
-        public static ITransaction GetMockTransaction(Action<ITransaction> constructor) {
-            return GetMock(constructor);
+        public static ICustomer GetMockCustomer() {
+            var cust = new Mock<ICustomer>();
+            cust.SetupAllProperties();
+            return cust.Object;
         }
 
         public static string TestDirectory {
