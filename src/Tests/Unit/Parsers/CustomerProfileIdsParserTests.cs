@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Authnet;
 using NUnit.Framework;
@@ -33,10 +33,10 @@ namespace Tests.Unit.Parsers {
     }
 
     public class CustomerProfileIdsParser {
-        public ParameterSet Parse(string rawXml) {
+        public Hash Parse(string rawXml) {
 
             var doc = XDocument.Parse(rawXml);
-            var set = new ParameterSet();
+            var set = new Hash();
             XNamespace schema = "AnetApi/xml/v1/schema/AnetApiSchema.xsd";
             var root = doc.Descendants(schema + "getCustomerProfileIdsResponse");
             Console.WriteLine(root);

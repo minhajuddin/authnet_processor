@@ -27,7 +27,7 @@ namespace Tests.Unit.Parsers {
 
             Assert.AreEqual(true, response.Success);
             Assert.AreEqual("Successful.", response.Message);
-            Assert.AreEqual("10000", response.ParameterSet["customerProfileId"].ToString());
+            Assert.AreEqual("10000", response.Params["customerProfileId"].ToString());
         }
     }
 }

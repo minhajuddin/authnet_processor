@@ -26,7 +26,7 @@ namespace Tests.Unit.Parsers {
 
             Assert.AreEqual(true, response.Success);
             Assert.AreEqual("Successful.", response.Message);
-            Assert.IsNotNullOrEmpty(response.ParameterSet["directResponse"].ToString());
+            Assert.IsNotNullOrEmpty(response.Params["directResponse"].ToString());
 
         }
     }

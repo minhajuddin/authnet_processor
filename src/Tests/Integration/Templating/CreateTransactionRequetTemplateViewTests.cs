@@ -20,7 +20,7 @@ namespace Tests.Integration.Templating {
                                   });
 
             var factory = TestHelper.TemplateFactory;
-            var template = factory.GetInstance("CreateTransactionRequest.spark");
+            var template = factory.GetInstance("createCustomerProfileTransactionRequest.spark");
             template.Authentication = ObjectMother.TestAuthentication;
             var result = template.Render(transaction);
             var expectedXml =

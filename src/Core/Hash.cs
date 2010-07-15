@@ -1,7 +1,7 @@
 using System.Collections;
 
 namespace Authnet {
-    public class ParameterSet {
+    public class Hash {
         Hashtable _innerHash;
         Hashtable InnerHash {
             get {
@@ -13,28 +13,28 @@ namespace Authnet {
 
         string _internalValue = "NO VALUE";
 
-        public ParameterSet(string value) {
+        public Hash(string value) {
             _internalValue = value;
         }
 
-        public ParameterSet() {
+        public Hash() {
         }
 
-        public ParameterSet this[string index] {
+        public Hash this[string index] {
             get {
-                return (ParameterSet)InnerHash[index];
+                return (Hash)InnerHash[index];
             }
             set {
                 InnerHash[index] = value;
             }
         }
 
-        public static implicit operator string(ParameterSet parameterSet) {
-            return parameterSet._internalValue;
+        public static implicit operator string(Hash hash) {
+            return hash._internalValue;
         }
 
-        public static implicit operator ParameterSet(string input) {
-            return new ParameterSet(input);
+        public static implicit operator Hash(string input) {
+            return new Hash(input);
         }
 
         public override string ToString() {

@@ -5,7 +5,7 @@ namespace Authnet.Parsers {
     public class CreateCustomerProfileTransactionParser : IParser {
         public Response Parse(string rawXml) {
             var response = new Response();
-            var set = new ParameterSet();
+            var set = new Hash();
 
             var doc = XDocument.Parse(rawXml);
             XNamespace schema = "AnetApi/xml/v1/schema/AnetApiSchema.xsd";
@@ -14,7 +14,7 @@ namespace Authnet.Parsers {
             response.Message = root.Descendants(schema + "text").First().Value;
             set["directResponse"] = root.Descendants(schema + "directResponse").First().Value;
 
-            response.ParameterSet = set;
+            response.Params = set;
             return response;
         }
     }

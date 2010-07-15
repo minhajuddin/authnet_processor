@@ -19,13 +19,13 @@ namespace Tests.Unit.Parsers {
   <customerAddressId>30000</customerAddressId>
 </createCustomerShippingAddressResponse>";
 
-            var parser = new CreateCustomerShippingParser();
+            var parser = new CreateCustomerShippingAddressParser();
 
             var response = parser.Parse(rawXml);
 
             Assert.AreEqual(true, response.Success);
             Assert.AreEqual("Successful.", response.Message);
-            Assert.AreEqual("30000", response.ParameterSet["customerAddressId"].ToString());
+            Assert.AreEqual("30000", response.Params["customerAddressId"].ToString());
         }
     }
 }

@@ -2,10 +2,10 @@ using System.Linq;
 using System.Xml.Linq;
 
 namespace Authnet.Parsers {
-    public class CreatePaymentProfileParser : IParser {
+    public class CreateCustomerPaymentProfileParser : IParser {
         public Response Parse(string rawXml) {
             var response = new Response();
-            var set = new ParameterSet();
+            var set = new Hash();
 
             var doc = XDocument.Parse(rawXml);
             XNamespace schema = "AnetApi/xml/v1/schema/AnetApiSchema.xsd";
@@ -14,8 +14,8 @@ namespace Authnet.Parsers {
             response.Message = root.Descendants(schema + "text").First().Value;
             set["customerPaymentProfileId"] = root.Descendants(schema + "customerPaymentProfileId").First().Value;
             set["validationDirectResponse"] = root.Descendants(schema + "validationDirectResponse").First().Value;
-            
-            response.ParameterSet = set;
+
+            response.Params = set;
             return response;
         }
     }

@@ -1,6 +1,6 @@
 namespace Authnet {
-    public interface ICustomerAddress {
-        string ProfileId { get; set; }
+    public interface IAddressAttributes {
+        string GateWayId { get; set; }
         string FirstName { get; set; }
         string LastName { get; set; }
         string Company { get; set; }

@@ -4,15 +4,9 @@ using Authnet.Parsers;
 using Authnet.Templating;
 
 namespace Authnet {
-    public class CustomerInformationManager : ICustomerInformationManager {
-
-        string _url = "https://apitest.authorize.net/xml/v1/request.api";
-        TemplateFactory _templateFactory;
-        Authentication _authentication;
-
-        public CustomerInformationManager(TemplateFactory templateFactory, Authentication authentication) {
-            _templateFactory = templateFactory;
-            _authentication = authentication;
+    public class CustomerInformationManager : GatewayBase, ICustomerInformationManager {
+        public CustomerInformationManager(TemplateFactory templateFactory, Authentication authentication)
+            : base(templateFactory, authentication) {
         }
 
         public long[] GetCustomerProfileIds() {
@@ -27,27 +21,16 @@ namespace Authnet {
         }
 
         public Response CreateCustomerProfile(ICustomer customer) {
-            var parser = new CreateCustomerProfileParser();
-            var connection = new Connection(_url);
-            var template = _templateFactory.GetInstance("createCustomerProfileRequest.spark");
-            template.Authentication = _authentication;
-            var requestBody = template.Render(customer);
-            var response = connection.Request("post", requestBody, null);
-            return parser.Parse(response);
+            return GetResponse(customer, "createCustomerProfileRequest.spark", new CreateCustomerProfileParser());
         }
 
         public Response CreatePaymentProfile(ICustomer customer) {
-            var parser = new CreatePaymentProfileParser();
-            var connection = new Connection(_url);
-            var template = _templateFactory.GetInstance("createCustomerPaymentProfileRequest.spark");
-            template.Authentication = _authentication;
-            var requestBody = template.Render(customer);
-            var response = connection.Request("post", requestBody, null);
-            return parser.Parse(response);
+            return GetResponse(customer, "createCustomerPaymentProfileRequest.spark", new CreateCustomerPaymentProfileParser());
         }
 
-        public Response CreateCustomerShippingAddress(ICustomerAddress customerAddress) {
-            var parser = new CreatePaymentProfileParser();
+        public Response CreateCustomerShippingAddress(IAddressAttributes customerAddress) {
+            //remove dups
+            var parser = new CreateCustomerPaymentProfileParser();
             var connection = new Connection(_url);
             var template = _templateFactory.GetInstance("createCustomerShippingAddressRequest.spark");
             template.Authentication = _authentication;
@@ -58,9 +41,9 @@ namespace Authnet {
 
         //TODO:This needs to go to IGateway
         public Response CreateCustomerProfileTransaction(ITransaction transaction) {
-            var parser = new CreatePaymentProfileParser();
+            var parser = new CreateCustomerPaymentProfileParser();
             var connection = new Connection(_url);
-            var template = _templateFactory.GetInstance("CreateTransactionRequest.spark");
+            var template = _templateFactory.GetInstance("createCustomerProfileTransactionRequest.spark");
             template.Authentication = _authentication;
             var requestBody = template.Render(transaction);
             var response = connection.Request("post", requestBody, null);

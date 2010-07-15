@@ -1,5 +1,7 @@
-> Naming conventions throughout the project
-> CIM >> remove duplication in all the methods by creating an internal generic method
+*> Naming conventions throughout the project
+*> CIM >> remove duplication in all the methods by creating an internal generic method
+> CIM >> move "charge" to the gateway and IGateway
 > Extract base parser
 > Cleanup the tests (move expected xml to object mother)
 > Validation
+> Split up ICustomer, ICustomerAddress and ITransaction into short meaningful interfaces

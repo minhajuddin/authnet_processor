@@ -7,20 +7,20 @@ namespace Tests {
 
         [Test]
         public void CanInstantiateAParameterSet() {
-            var set = new ParameterSet();
+            var set = new Hash();
             Assert.NotNull(set);
         }
 
         [Test]
         public void CanAddDataToParameterSets() {
-            var set = new ParameterSet();
+            var set = new Hash();
             set["key"] = "XyfooKab";
             Assert.AreEqual("XyfooKab", set["key"].ToString());
         }
 
         [Test]
         public void CanAddMultiplePairsToParameterSets() {
-            var set = new ParameterSet();
+            var set = new Hash();
             set["key"] = "XyfooKab";
             set["other"] = "new value";
             Assert.AreEqual("XyfooKab", set["key"].ToString());
@@ -29,20 +29,20 @@ namespace Tests {
 
         [Test]
         public void CanConvertStringsToParamters() {
-            ParameterSet set = "some value";
+            Hash set = "some value";
             Assert.NotNull(set);
         }
 
         [Test]
         public void CanConvertParameterSetsToStrings() {
-            string foo = new ParameterSet("some string");
+            string foo = new Hash("some string");
             Assert.AreEqual("some string", foo);
         }
 
         [Test]
         public void CanAddParamterSetToParameterSets() {
-            var set = new ParameterSet();
-            var auth = new ParameterSet();
+            var set = new Hash();
+            var auth = new Hash();
             auth["user"] = "Khaja";
             auth["pwd"] = "test";
             set["auth"] = auth;

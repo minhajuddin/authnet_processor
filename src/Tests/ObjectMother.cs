@@ -18,7 +18,7 @@ namespace Tests {
             return GetMock(constructor);
         }
 
-        public static ICustomerAddress GetMockCustomerAddress(Action<ICustomerAddress> constructor) {
+        public static IAddressAttributes GetMockCustomerAddress(Action<IAddressAttributes> constructor) {
             return GetMock(constructor);
         }
 

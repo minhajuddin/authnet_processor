@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ namespace Tests.Unit {
         [Test]
         public void ResponseHasAParameterSet() {
             var response = new Response();
-            Assert.NotNull( response.ParameterSet );
+            Assert.NotNull( response.Params );
         }
     }
 }
