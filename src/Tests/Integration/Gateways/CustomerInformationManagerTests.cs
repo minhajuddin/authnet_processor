@@ -162,12 +162,29 @@ namespace Tests.Integration.Gateways {
 
             var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
 
-            _paymentProfileAttributes.GateWayId  = createPaymentProfileResponse.Params["customerPaymentProfileId"];
+            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"];
             expectedId = createPaymentProfileResponse.Params["customerPaymentProfileId"];
 
-            var getPaymentProfileResponse = cim.Get(_profileAttributes,_paymentProfileAttributes);
-            Assert.IsTrue(getPaymentProfileResponse .Success);
+            var getPaymentProfileResponse = cim.Get(_profileAttributes, _paymentProfileAttributes);
+            Assert.IsTrue(getPaymentProfileResponse.Success);
             Assert.AreEqual(expectedId, getPaymentProfileResponse.Params["customerPaymentProfileId"].ToString());
+        }
+
+        [Test]
+        public void CanGetCustomerShippingAddress() {
+            string expectedId;
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+
+            var createProfileResponse = cim.Create(_profileAttributes);
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+            var createShippingAddressResponse = cim.Create(_profileAttributes, _addressAttributes);
+            _addressAttributes.GateWayId = createShippingAddressResponse.Params["customerAddressId"];
+            expectedId = createShippingAddressResponse.Params["customerAddressId"];
+
+            var response = cim.Get(_profileAttributes, _addressAttributes);
+            Assert.IsTrue(createShippingAddressResponse.Success);
+            Assert.AreEqual(expectedId, response.Params["customerAddressId"].ToString());
         }
 
     }
