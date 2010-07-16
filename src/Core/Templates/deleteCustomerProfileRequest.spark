@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+#var profile = (Authnet.IProfileAttributes)Model;
+<deleteCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+  <render partial="_authentication" />
+  <customerProfileId>${profile.GateWayId}</customerProfileId>
+</deleteCustomerProfileRequest>

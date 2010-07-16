@@ -186,8 +186,6 @@ namespace Tests.Integration.Gateways {
             Assert.IsTrue(createShippingAddressResponse.Success);
             Assert.AreEqual(expectedId, response.Params["customerAddressId"].ToString());
         }
-
     }
-
 }
 
