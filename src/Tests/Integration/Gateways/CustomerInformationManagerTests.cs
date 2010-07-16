@@ -152,6 +152,24 @@ namespace Tests.Integration.Gateways {
             Assert.AreEqual(expectedEmail, getProfileResponse.Params["Email"].ToString());
         }
 
+        [Test]
+        public void CanGetPaymentProfile() {
+            string expectedId;
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
+
+            _paymentProfileAttributes.GateWayId  = createPaymentProfileResponse.Params["customerPaymentProfileId"];
+            expectedId = createPaymentProfileResponse.Params["customerPaymentProfileId"];
+
+            var getPaymentProfileResponse = cim.Get(_profileAttributes,_paymentProfileAttributes);
+            Assert.IsTrue(getPaymentProfileResponse .Success);
+            Assert.AreEqual(expectedId, getPaymentProfileResponse.Params["customerPaymentProfileId"].ToString());
+        }
+
     }
 
 }
