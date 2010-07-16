@@ -6,41 +6,61 @@ using NUnit.Framework;
 namespace Tests.Integration.Gateways {
     [TestFixture]
     public class CustomerInformationManagerTests {
-        ICustomer _customer;
-        ITransaction _transaction;
+        private IProfileAttributes _profileAttributes;
+        private IAddressAttributes _addressAttributes;
+        private ICreditCardAttributes _creditCardAttributes;
+        private IPaymentProfileAttributes _paymentProfileAttributes;
+        private IOrder _order;
 
         [SetUp]
         public void Setup() {
 
             var random = new Random();
-            _customer = ObjectMother.GetMockCustomer();
+            _profileAttributes = ObjectMother.GetMockProfileAttributes(x =>
+           {
+               x.CustomerId = random.Next().ToString();
+               x.Email = "test2@cosmicvent.com";
+           });
 
-
-            _customer.Description = "test profile" + random.Next();
-            _customer.Email = "test@cosmicvent.com";
-            _customer.FirstName = "Rafi";
-            _customer.LastName = "Sk";
-            _customer.Address = "Rajendranagar";
-            _customer.City = "Hyderabad";
-            _customer.State = "AP";
-            _customer.Zip = "500048";
-            _customer.Company = "cosmicvent";
-            _customer.Country = "India";
-            _customer.CardNumber = "4111111111111111";
-            _customer.ExpirationDate = DateTime.Now.AddMonths(1).ToString("yyyy-MM");
-
-
-            var next = random.Next(1, 5000);
-
-            _transaction = ObjectMother.GetMockTransaction(x =>
+            _addressAttributes = ObjectMother.GetMockIAddressAttributes(x =>
             {
-                x.Amount = next;
-                x.Description = "Transaction" + next;
-                x.InVoiceNumber = "IN" + next;
-                x.PurchaseOrderNumber = "PO" + next;
-                x.RecurringBilling = false;
-                x.TaxExempt = false;
+                x.FirstName = "Rafi";
+                x.LastName = "Sk";
+                x.Address = "Rajendranagar";
+                x.City = "Hyderabad";
+                x.State = "AP";
+                x.Zip = "500048";
+                x.Company = "cosmicvent";
+                x.Country = "India";
             });
+            _creditCardAttributes = ObjectMother.GetMockCreditCardAttributes(x =>
+            {
+                x.CardNumber = "4111111111111111";
+                x.ExpirationDate = DateTime.Now.AddMonths(1).ToString("yyyy-MM");
+            });
+
+            _paymentProfileAttributes = ObjectMother.GetMockPaymentProfileAttributes();
+
+            _order = ObjectMother.GetMockOrder(x =>
+                                                      {
+
+                                                          x.Amount = random.Next(1, 5000);
+                                                          x.Description = "amount of" + random.Next(1, 5000);
+                                                      });
+
+            //
+
+            //var next = random.Next(1, 5000);
+
+            //_transaction = ObjectMother.GetMockTransaction(x =>
+            //{
+            //    x.Amount = next;
+            //    x.Description = "Transaction" + next;
+            //    x.InVoiceNumber = "IN" + next;
+            //    x.PurchaseOrderNumber = "PO" + next;
+            //    x.RecurringBilling = false;
+            //    x.TaxExempt = false;
+            //});
 
         }
 
@@ -56,13 +76,13 @@ namespace Tests.Integration.Gateways {
         [Test]
         public void CanCreateCustomerProfile() {
             var random = new Random();
-            var customer = ObjectMother.GetMockCustomer(x =>
+            var profileAttributes = ObjectMother.GetMockProfileAttributes(x =>
                                                             {
-                                                                x.Description = "test profile" + random.Next();
+                                                                x.CustomerId = random.Next().ToString();
                                                                 x.Email = "test2@cosmicvent.com";
                                                             });
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var response = cim.CreateCustomerProfile(customer);
+            var response = cim.Create(profileAttributes);
             Assert.IsTrue(response.Success);
             Assert.NotNull(response.Params["customerProfileId"]);
         }
@@ -70,12 +90,11 @@ namespace Tests.Integration.Gateways {
         [Test]
         public void CanCreatePaymentProfile() {
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createProfileResponse = cim.CreateCustomerProfile(_customer);
+            var createProfileResponse = cim.Create(_profileAttributes);
 
-            _customer.ProfileId = createProfileResponse.Params["customerProfileId"];
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
 
-            var createPaymentProfileResponse = cim.CreatePaymentProfile(_customer);
-
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
 
             Assert.IsTrue(createPaymentProfileResponse.Success);
             Assert.NotNull(createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString());
@@ -85,16 +104,18 @@ namespace Tests.Integration.Gateways {
         public void CanCreatePaymentProfileTransaction() {
 
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createProfileResponse = cim.CreateCustomerProfile(_customer);
+            var createProfileResponse = cim.Create(_profileAttributes);
 
-            var profileid = createProfileResponse.Params["customerProfileId"];
-            _customer.ProfileId = profileid;
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
 
-            var createPaymentProfileResponse = cim.CreatePaymentProfile(_customer);
 
-            _transaction.ProfileId = profileid;
-            _transaction.PaymentProfileId = createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString();
-            var createPaymentProfileTransactionResponse = cim.CreateCustomerProfileTransaction(_transaction);
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
+
+
+            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString();
+
+            var gateway = new Gateway(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order);
 
 
             Assert.IsTrue(createPaymentProfileTransactionResponse.Success);
@@ -104,24 +125,11 @@ namespace Tests.Integration.Gateways {
         [Test]
         public void CanCreateCustomerShippingAddress() {
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            //var createProfileResponse = cim.CreateCustomerProfile(_customer);
 
-            var customerAddress = ObjectMother.GetMockCustomerAddress(x =>
-            {
-                var random = new Random();
-                x.FirstName = "Rafi" + random.Next(1, 5000);
-                x.LastName = "Sk";
-                x.Address = "Rajendranagar";
-                x.City = "Hyderabad";
-                x.State = "AP";
-                x.Zip = "500048";
-                x.Company = "cosmicvent";
-                x.Country = "India";
-                x.PhoneNumber = "9951313930";
-            });
+            var createProfileResponse = cim.Create(_profileAttributes);
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
 
-            //customerAddress.ProfileId = createProfileResponse.Params["customerProfileId"];
-            var createShippingAddressResponse = cim.CreateCustomerShippingAddress(customerAddress);
+            var createShippingAddressResponse = cim.Create(_profileAttributes, _addressAttributes);
             Assert.IsTrue(createShippingAddressResponse.Success);
             Assert.NotNull(createShippingAddressResponse.Params["customerAddressId"].ToString());
         }

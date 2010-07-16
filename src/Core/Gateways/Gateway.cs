@@ -1,23 +1,21 @@
 using System;
+using System.Collections.Generic;
 using Authnet.Model;
-using Authnet.Net;
 using Authnet.Parsers;
 using Authnet.Templating;
 
 namespace Authnet.Gateways {
-    class Gateway : GatewayBase, IGateway {
+    public class Gateway : GatewayBase, IGateway {
         public Gateway(TemplateFactory templateFactory, Authentication authentication)
             : base(templateFactory, authentication) {
         }
 
-        public Response Charge(ICustomer customer) {
-            var parser = new CreateCustomerPaymentProfileParser();
-            var connection = new Connection(_url);
-            var template = _templateFactory.GetInstance("createCustomerProfileTransactionRequest.spark");
-            template.Authentication = _authentication;
-            var requestBody = template.Render(transaction);
-            var response = connection.Request("post", requestBody, null);
-            return parser.Parse(response);
+        public Response Charge(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, IOrder order) {
+            var chargeAttributes = new Dictionary<string, object>();
+            chargeAttributes.Add("profile", profileAttributes);
+            chargeAttributes.Add("paymentProfile", paymentProfileAttributes);
+            chargeAttributes.Add("order", order);
+            return GetResponse(chargeAttributes, "createCustomerProfileTransactionRequest.spark", new CreateCustomerProfileTransactionParser());
         }
 
         public Response Refund(ICustomer customer) {

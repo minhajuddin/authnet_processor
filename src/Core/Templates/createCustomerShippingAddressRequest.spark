@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-#var shippingAddress = (Authnet.ICustomerAddress)Model;
+#var shipping = (System.Collections.Generic.Dictionary<string,object>)Model;
+#var profile = (Authnet.IProfileAttributes)shipping["profileAttributes"];
+#var shippingAddress = (Authnet.IAddressAttributes)shipping["shippingAddressAttributes"];
 <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
   <render partial="_authentication" />
-  <customerProfileId>${shippingAddress.ProfileId}</customerProfileId>
+  <customerProfileId>${profile.GateWayId}</customerProfileId>
   <address>
     <firstName>${shippingAddress.FirstName}</firstName>
     <lastName>${shippingAddress.LastName}</lastName>

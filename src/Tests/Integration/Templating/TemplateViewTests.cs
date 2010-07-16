@@ -38,9 +38,9 @@ namespace Tests.Integration.Templating {
 
         [Test]
         public void RenderRendersTheTemplateWithTheModelSetToCustomer() {
-            var customer = ObjectMother.GetMockCustomer(x =>
+            var customer = ObjectMother.GetMockProfileAttributes(x =>
             {
-                x.Description = "test profile";
+                x.CustomerId = "test profile";
                 x.Email = "test2@cosmicvent.com";
             });
 

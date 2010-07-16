@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-#var customer = (Authnet.ICustomer)Model;
+#var customer = (System.Collections.Generic.Dictionary<string,object>)Model;
+#var profile = (Authnet.IProfileAttributes)customer["profileAttributes"];
+#var billingAddress = (Authnet.IAddressAttributes)customer["billingAddressAttributes"];
+#var creditCardinfo = (Authnet.ICreditCardAttributes)customer["creditCardAttributes"];
+
 <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
   <render partial="_authentication" />
-  <customerProfileId>${customer.ProfileId}</customerProfileId>
+  <customerProfileId>${profile.GateWayId}</customerProfileId>
   <paymentProfile>
     <billTo>
-      <firstName>${customer.FirstName}</firstName>
-      <lastName>${customer.LastName}</lastName>
-      <company>${customer.Company}</company>
-      <address>${customer.Address}</address>
-      <city>${customer.City}</city>
-      <state>${customer.State}</state>
-      <zip>${customer.Zip}</zip>
-      <country>${customer.Country}</country>
-      <phoneNumber>${customer.PhoneNumber}</phoneNumber>
-      <faxNumber>${customer.FaxNumber}</faxNumber>
+      <firstName>${billingAddress.FirstName}</firstName>
+      <lastName>${billingAddress.LastName}</lastName>
+      <company>${billingAddress.Company}</company>
+      <address>${billingAddress.Address}</address>
+      <city>${billingAddress.City}</city>
+      <state>${billingAddress.State}</state>
+      <zip>${billingAddress.Zip}</zip>
+      <country>${billingAddress.Country}</country>
+      <phoneNumber>${billingAddress.PhoneNumber}</phoneNumber>
+      <faxNumber>${billingAddress.FaxNumber}</faxNumber>
     </billTo>
     <payment>
       <creditCard>
-        <cardNumber>${customer.CardNumber}</cardNumber>
-        <expirationDate>${customer.ExpirationDate}</expirationDate>
+        <cardNumber>${creditCardinfo.CardNumber}</cardNumber>
+        <expirationDate>${creditCardinfo.ExpirationDate}</expirationDate>
       </creditCard>
     </payment>
   </paymentProfile>

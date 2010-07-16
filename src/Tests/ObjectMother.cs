@@ -10,7 +10,11 @@ namespace Tests {
             get { return new Authentication("54PB5egZ", "48V258vr55AE8tcg"); }
         }
 
-        public static ICustomer GetMockCustomer(Action<ICustomer> constructor) {
+        public static IProfileAttributes GetMockProfileAttributes(Action<IProfileAttributes> constructor) {
+            return GetMock(constructor);
+        }
+
+        public static IPaymentProfileAttributes GetMockPaymentProfileAttributes(Action<IPaymentProfileAttributes> constructor) {
             return GetMock(constructor);
         }
 
@@ -18,7 +22,15 @@ namespace Tests {
             return GetMock(constructor);
         }
 
-        public static IAddressAttributes GetMockCustomerAddress(Action<IAddressAttributes> constructor) {
+        public static IAddressAttributes GetMockIAddressAttributes(Action<IAddressAttributes> constructor) {
+            return GetMock(constructor);
+        }
+
+        public static ICreditCardAttributes GetMockCreditCardAttributes(Action<ICreditCardAttributes> constructor) {
+            return GetMock(constructor);
+        }
+
+        public static IOrder GetMockOrder(Action<IOrder> constructor) {
             return GetMock(constructor);
         }
 
@@ -31,6 +43,12 @@ namespace Tests {
 
         public static ICustomer GetMockCustomer() {
             var cust = new Mock<ICustomer>();
+            cust.SetupAllProperties();
+            return cust.Object;
+        }
+
+        public static IPaymentProfileAttributes GetMockPaymentProfileAttributes() {
+            var cust = new Mock<IPaymentProfileAttributes>();
             cust.SetupAllProperties();
             return cust.Object;
         }

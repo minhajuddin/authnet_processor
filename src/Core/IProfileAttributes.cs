@@ -1,7 +1,7 @@
 namespace Authnet {
     public interface IProfileAttributes {
-        string GateWayId { get; }
-        string Email { get; }
-        string CustomerId { get; }
+        string GateWayId { get; set; }
+        string Email { get; set; }
+        string CustomerId { get; set; }
     }
 }

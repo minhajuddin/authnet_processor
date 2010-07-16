@@ -5,9 +5,9 @@ namespace Tests.Integration.Templating {
     public class CreateCustomerProfileTemplateViewTests {
         [Test]
         public void Render_RenderCreateCustomerProfileTemplateView_ProvidedCustomer() {
-            var customer = ObjectMother.GetMockCustomer(x =>
+            var customer = ObjectMother.GetMockProfileAttributes(x =>
                                                             {
-                                                                x.Description = "test profile";
+                                                                x.CustomerId = "test profile";
                                                                 x.Email = "test2@cosmicvent.com";
                                                             });
             var factory = TestHelper.TemplateFactory;
