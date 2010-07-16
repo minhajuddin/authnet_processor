@@ -91,6 +91,7 @@
     <None Include="Templates\createCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\createCustomerProfileTransactionRequest.spark" />
     <None Include="Templates\createCustomerShippingAddressRequest.spark" />
+    <None Include="Templates\deleteCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\deleteCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileRequest.spark" />

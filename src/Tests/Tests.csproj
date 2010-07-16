@@ -63,6 +63,7 @@
     <Compile Include="Integration\Templating\CreateCustomerShippingAddressTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\CreatePaymentProfileTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\CreateTransactionRequetTemplateViewTests.cs" />
+    <Compile Include="Integration\Templating\DeleteCustomerPaymentProfileTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\DeleteCustomerProfileTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\GetCustomerPaymentProfileTemplateView.cs" />
     <Compile Include="Integration\Templating\GetCustomerProfileTemplateViewTests.cs" />
