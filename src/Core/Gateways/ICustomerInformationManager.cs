@@ -7,5 +7,6 @@ namespace Authnet.Gateways {
         Response Get(IProfileAttributes profileAttributes);
         Response Get(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes);
         Response Get(IProfileAttributes profileAttributes, IAddressAttributes addressAttributes);
+        Response Delete(IProfileAttributes profileAttributes);
     }
 }

@@ -186,6 +186,20 @@ namespace Tests.Integration.Gateways {
             Assert.IsTrue(createShippingAddressResponse.Success);
             Assert.AreEqual(expectedId, response.Params["customerAddressId"].ToString());
         }
+
+        [Test]
+        public void CanDeleteCustomerProfile() {
+
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var response = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = response.Params["customerProfileId"];
+
+            var deleteResponse = cim.Delete(_profileAttributes);
+            Assert.IsTrue(deleteResponse.Success);
+
+        }
+
     }
 }
 
