@@ -65,6 +65,7 @@
     <Compile Include="Integration\Templating\CreateTransactionRequetTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\GetCustomerPaymentProfileTemplateView.cs" />
     <Compile Include="Integration\Templating\GetCustomerProfileTemplateViewTests.cs" />
+    <Compile Include="Integration\Templating\GetCustomerShippingAddressTemplateView.cs" />
     <Compile Include="ObjectMother.cs" />
     <Compile Include="Integration\Templating\TemplateViewTests.cs" />
     <Compile Include="Integration\Templating\TemplateFactoryTests.cs" />

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+#var customer = (System.Collections.Generic.Dictionary<string,object>)Model;
+#var profile = (Authnet.IProfileAttributes)customer["profileAttributes"];
+#var address = (Authnet.IAddressAttributes)customer["addressAttributes"];
+<getCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+  <render partial="_authentication" />
+  <customerProfileId>${profile.GateWayId}</customerProfileId>
+  <customerAddressId>${address.GateWayId}</customerAddressId>
+</getCustomerShippingAddressRequest>
