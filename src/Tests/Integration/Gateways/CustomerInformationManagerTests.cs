@@ -200,6 +200,23 @@ namespace Tests.Integration.Gateways {
 
         }
 
+        [Test]
+        public void CanDeletePaymentProfile() {
+
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
+
+            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"];
+
+
+            var deletePaymentProfileResponse = cim.Delete(_profileAttributes, _paymentProfileAttributes);
+            Assert.IsTrue(deletePaymentProfileResponse.Success);
+        }
+
     }
 }
 
