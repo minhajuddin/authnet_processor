@@ -74,6 +74,7 @@
     <Compile Include="Parsers\CreateCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\CreateCustomerProfileTransactionParser.cs" />
     <Compile Include="Parsers\CreateCustomerShippingAddressParser.cs" />
+    <Compile Include="Parsers\DeleteCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\DeleteCustomerProfileParser.cs" />
     <Compile Include="Parsers\GetCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\GetCustomerProfileParser.cs" />
