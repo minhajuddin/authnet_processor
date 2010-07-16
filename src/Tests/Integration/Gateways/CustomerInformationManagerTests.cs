@@ -134,6 +134,24 @@ namespace Tests.Integration.Gateways {
             Assert.NotNull(createShippingAddressResponse.Params["customerAddressId"].ToString());
         }
 
+
+        [Test]
+        public void CanGetCustomerProfile() {
+
+            var expectedDescrioption = _profileAttributes.CustomerId;
+            var expectedEmail = _profileAttributes.Email;
+
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+
+            var createProfileResponse = cim.Create(_profileAttributes);
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+            var getProfileResponse = cim.Get(_profileAttributes);
+            Assert.IsTrue(getProfileResponse.Success);
+            Assert.AreEqual(expectedDescrioption, getProfileResponse.Params["Description"].ToString());
+            Assert.AreEqual(expectedEmail, getProfileResponse.Params["Email"].ToString());
+        }
+
     }
 
 }

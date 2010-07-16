@@ -43,6 +43,10 @@ namespace Authnet.Gateways {
             return GetResponse(shippingAddressAttributes, "createCustomerShippingAddressRequest.spark", new CreateCustomerShippingAddressParser());
         }
 
+        public Response Get(IProfileAttributes profileAttributes) {
+            return GetResponse(profileAttributes, "getCustomerProfileRequest.spark", new GetCustomerProfileParser());
+        }
+
         //public Response Create(IAddressAttributes shippingAddress,IProfileAttributes profileAttributes) {
 
         //    return GetResponse(shippingAddress, "createCustomerPaymentProfileRequest.spark", new CreateCustomerPaymentProfileParser());

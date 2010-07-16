@@ -4,5 +4,6 @@ namespace Authnet.Gateways {
         Response Create(IProfileAttributes profileAttributes);
         Response CreatePaymentProfile(IProfileAttributes profile, IAddressAttributes billingAddress, ICreditCardAttributes creditCardInfo);
         Response Create(IProfileAttributes profileAttributes, IAddressAttributes shippingAddress);
+        Response Get(IProfileAttributes profileAttributes);
     }
 }
