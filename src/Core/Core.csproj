@@ -81,6 +81,7 @@
     <Compile Include="Parsers\GetCustomerProfileParser.cs" />
     <Compile Include="Parsers\GetCustomerShippingAddressParser.cs" />
     <Compile Include="Parsers\ParserBase.cs" />
+    <Compile Include="Parsers\UpdateCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\UpdateCustomerProfileParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
@@ -100,6 +101,7 @@
     <None Include="Templates\getCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerShippingAddressRequest.spark" />
+    <None Include="Templates\updateCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\updateCustomerProfileRequest.spark" />
     <None Include="Templates\_authentication.spark" />
     <None Include="Templates\createCustomerProfileRequest.spark" />

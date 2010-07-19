@@ -69,6 +69,7 @@
     <Compile Include="Integration\Templating\GetCustomerPaymentProfileTemplateView.cs" />
     <Compile Include="Integration\Templating\GetCustomerProfileTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\GetCustomerShippingAddressTemplateView.cs" />
+    <Compile Include="Integration\Templating\UpdateCustomerPaymentProfileTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\UpdateCustomerProfileTemplateViewTests.cs" />
     <Compile Include="ObjectMother.cs" />
     <Compile Include="Integration\Templating\TemplateViewTests.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Unit\Parsers\GetCustomerPaymentProfileParserTests.cs" />
     <Compile Include="Unit\Parsers\GetCustomerProfileParserTests.cs" />
     <Compile Include="Unit\Parsers\GetCustomerShippingAddressParserTests.cs" />
+    <Compile Include="Unit\Parsers\UpdateCustomerPaymentProfileParserTests.cs" />
     <Compile Include="Unit\Parsers\UpdateCustomerProfileParserTests.cs" />
     <Compile Include="Unit\ResponseTests.cs" />
   </ItemGroup>
