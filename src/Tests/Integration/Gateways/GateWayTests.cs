@@ -58,53 +58,21 @@ namespace Tests.Integration.Gateways {
         [Test]
         public void CanCreatePaymentProfileTransactionAuthCapture() {
 
-            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createProfileResponse = cim.Create(_profileAttributes);
-
-            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
-
-
-            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
-
-
-            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString();
-
-            var gateway = new Gateway(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order, _transaction);
-
-
-            Assert.IsTrue(createPaymentProfileTransactionResponse.Success);
-            Assert.NotNull(createPaymentProfileTransactionResponse.Params["directResponse"].ToString());
+            GetResult(() => TransactionType.AuthCapture);
         }
 
         [Test]
         public void CanCreatePaymentProfileTransactionAuthOnly() {
 
-            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createProfileResponse = cim.Create(_profileAttributes);
-
-            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
-
-
-            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
-
-
-            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString();
-
-            var gateway = new Gateway(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-
-            _transaction.Type = TransactionType.AuthOnly;
-
-            var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order, _transaction);
-
-
-            Assert.IsTrue(createPaymentProfileTransactionResponse.Success);
-            Assert.NotNull(createPaymentProfileTransactionResponse.Params["directResponse"].ToString());
+            GetResult(() => TransactionType.AuthOnly);
         }
 
         [Test]
         public void CanCreatePaymentProfileTransactionCaptureOnly() {
+            GetResult(() => TransactionType.CaptureOnly);
+        }
 
+        private void GetResult(Func<TransactionType> action) {
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
             var createProfileResponse = cim.Create(_profileAttributes);
 
@@ -118,14 +86,12 @@ namespace Tests.Integration.Gateways {
 
             var gateway = new Gateway(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
 
-            _transaction.Type = TransactionType.CaptureOnly;
-
+            _transaction.Type = action();
             var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order, _transaction);
 
 
             Assert.IsTrue(createPaymentProfileTransactionResponse.Success);
             Assert.NotNull(createPaymentProfileTransactionResponse.Params["directResponse"].ToString());
         }
-
     }
 }
