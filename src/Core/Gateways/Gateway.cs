@@ -12,12 +12,12 @@ namespace Authnet.Gateways {
 
         //create a Charge method which will do only authcatpure
         //change ITransaction to TransactionType and make it protected
-        public Response Charge(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, IOrder order, ITransaction transaction) {
+        public Response Charge(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, IOrder order) {
             var chargeAttributes = new Dictionary<string, object>();
             chargeAttributes.Add("profile", profileAttributes);
             chargeAttributes.Add("paymentProfile", paymentProfileAttributes);
             chargeAttributes.Add("order", order);
-            return GetResponse(chargeAttributes, "createCustomerProfileTransactionRequest" + transaction.Type + ".spark", new CreateCustomerProfileTransactionParser());
+            return GetResponse(chargeAttributes, "createCustomerProfileTransactionRequestAuthCapture.spark", new CreateCustomerProfileTransactionParser());
         }
 
         public Response Refund(ICustomer customer) {
