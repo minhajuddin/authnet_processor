@@ -100,27 +100,6 @@ namespace Tests.Integration.Gateways {
             Assert.NotNull(createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString());
         }
 
-        [Test]
-        public void CanCreatePaymentProfileTransaction() {
-
-            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createProfileResponse = cim.Create(_profileAttributes);
-
-            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
-
-
-            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
-
-
-            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString();
-
-            var gateway = new Gateway(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
-            var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order);
-
-
-            Assert.IsTrue(createPaymentProfileTransactionResponse.Success);
-            Assert.NotNull(createPaymentProfileTransactionResponse.Params["directResponse"].ToString());
-        }
 
         [Test]
         public void CanCreateCustomerShippingAddress() {

@@ -10,12 +10,12 @@ namespace Authnet.Gateways {
             : base(templateFactory, authentication) {
         }
 
-        public Response Charge(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, IOrder order) {
+        public Response Charge(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, IOrder order, ITransaction transaction) {
             var chargeAttributes = new Dictionary<string, object>();
             chargeAttributes.Add("profile", profileAttributes);
             chargeAttributes.Add("paymentProfile", paymentProfileAttributes);
             chargeAttributes.Add("order", order);
-            return GetResponse(chargeAttributes, "createCustomerProfileTransactionRequest.spark", new CreateCustomerProfileTransactionParser());
+            return GetResponse(chargeAttributes, "createCustomerProfileTransactionRequest" + transaction.Type + ".spark", new CreateCustomerProfileTransactionParser());
         }
 
         public Response Refund(ICustomer customer) {

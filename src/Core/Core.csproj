@@ -94,7 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Templates\createCustomerPaymentProfileRequest.spark" />
-    <None Include="Templates\createCustomerProfileTransactionRequest.spark" />
+    <None Include="Templates\createCustomerProfileTransactionRequestAuthCapture.spark" />
+    <None Include="Templates\createCustomerProfileTransactionRequestAuthOnly.spark" />
+    <None Include="Templates\createCustomerProfileTransactionRequestCaptureOnly.spark" />
     <None Include="Templates\createCustomerShippingAddressRequest.spark" />
     <None Include="Templates\deleteCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\deleteCustomerProfileRequest.spark" />

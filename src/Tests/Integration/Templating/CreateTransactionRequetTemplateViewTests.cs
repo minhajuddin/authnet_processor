@@ -39,34 +39,12 @@ namespace Tests.Integration.Templating {
         }
 
         [Test]
-        public void RenderCreateTransactionRequestTemplate() {
+        public void RenderCreateTransactionRequestAuthCaptureTemplate() {
 
             var factory = TestHelper.TemplateFactory;
             var template = factory.GetInstance("createCustomerProfileTransactionRequest.spark");
             template.Authentication = ObjectMother.TestAuthentication;
             var result = template.Render(_chargeAttributes);
-
-            //            var expectedXml =
-            //                @"<?xml version=""1.0"" encoding=""utf-8"" ?>
-            //<createCustomerProfileTransactionRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">  <merchantAuthentication>
-            //    <name>54PB5egZ</name>
-            //    <transactionKey>48V258vr55AE8tcg</transactionKey>
-            //  </merchantAuthentication>
-            //  <transaction>
-            //    <profileTransAuthCapture>
-            //      <amount>100</amount>
-            //      <customerProfileId>123215</customerProfileId>
-            //      <customerPaymentProfileId>829831</customerPaymentProfileId>
-            //      <order>
-            //        <invoiceNumber>DG43RK</invoiceNumber>
-            //        <description>First Transaction</description>
-            //        <purchaseOrderNumber>PO1234</purchaseOrderNumber>
-            //      </order>
-            //      <taxExempt>false</taxExempt>
-            //      <recurringBilling>false</recurringBilling>
-            //    </profileTransAuthCapture>
-            //  </transaction>
-            //</createCustomerProfileTransactionRequest>";
 
             var expectedXml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <createCustomerProfileTransactionRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">  <merchantAuthentication>
@@ -84,6 +62,67 @@ namespace Tests.Integration.Templating {
         <purchaseOrderNumber></purchaseOrderNumber>
       </order>
       </profileTransAuthCapture>
+  </transaction>
+</createCustomerProfileTransactionRequest>";
+
+            Assert.AreEqual(expectedXml, result);
+        }
+
+
+        [Test]
+        public void RenderCreateTransactionRequestAuthOnlyTemplate() {
+
+            var factory = TestHelper.TemplateFactory;
+            var template = factory.GetInstance("createCustomerProfileTransactionRequestAuthOnly.spark");
+            template.Authentication = ObjectMother.TestAuthentication;
+            var result = template.Render(_chargeAttributes);
+
+            var expectedXml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+<createCustomerProfileTransactionRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">  <merchantAuthentication>
+    <name>54PB5egZ</name>
+    <transactionKey>48V258vr55AE8tcg</transactionKey>
+  </merchantAuthentication>
+  <transaction>
+    <profileTransAuthOnly>
+      <amount>100</amount>
+      <customerProfileId>123215</customerProfileId>
+      <customerPaymentProfileId>829831</customerPaymentProfileId>
+      <order>
+        <invoiceNumber></invoiceNumber>
+        <description>First Transaction</description>
+        <purchaseOrderNumber></purchaseOrderNumber>
+      </order>
+      </profileTransAuthOnly>
+  </transaction>
+</createCustomerProfileTransactionRequest>";
+
+            Assert.AreEqual(expectedXml, result);
+        }
+
+        [Test]
+        public void RenderCreateTransactionRequestCaptureOnlyTemplate() {
+
+            var factory = TestHelper.TemplateFactory;
+            var template = factory.GetInstance("createCustomerProfileTransactionRequestCapchOnly.spark");
+            template.Authentication = ObjectMother.TestAuthentication;
+            var result = template.Render(_chargeAttributes);
+
+            var expectedXml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+<createCustomerProfileTransactionRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">  <merchantAuthentication>
+    <name>54PB5egZ</name>
+    <transactionKey>48V258vr55AE8tcg</transactionKey>
+  </merchantAuthentication>
+  <transaction>
+    <profileTransCaptureOnly>
+      <amount>100</amount>
+      <customerProfileId>123215</customerProfileId>
+      <customerPaymentProfileId>829831</customerPaymentProfileId>
+      <order>
+        <invoiceNumber></invoiceNumber>
+        <description>First Transaction</description>
+        <purchaseOrderNumber></purchaseOrderNumber>
+      </order>
+      </profileTransCaptureOnly>
   </transaction>
 </createCustomerProfileTransactionRequest>";
 

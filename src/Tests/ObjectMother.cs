@@ -34,6 +34,10 @@ namespace Tests {
             return GetMock(constructor);
         }
 
+        public static ITransaction GetMockOrder(Action<ITransaction> constructor) {
+            return GetMock(constructor);
+        }
+
         public static T GetMock<T>(Action<T> constructor) where T : class {
             var mock = new Mock<T>();
             mock.SetupAllProperties();

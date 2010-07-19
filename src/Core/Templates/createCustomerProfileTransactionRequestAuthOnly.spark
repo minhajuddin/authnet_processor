@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+#var transaction = (System.Collections.Generic.Dictionary<string,object>)Model;
+#var profile = (Authnet.IProfileAttributes)transaction["profile"];
+#var paymentProfile = (Authnet.IPaymentProfileAttributes)transaction["paymentProfile"];
+#var order = (Authnet.IOrder)transaction["order"];
+<createCustomerProfileTransactionRequest xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
+  <render partial="_authentication" />
+  <transaction>
+    <profileTransAuthOnly>
+      <amount>${order.Amount}</amount>
+      <customerProfileId>${profile.GateWayId}</customerProfileId>
+      <customerPaymentProfileId>${paymentProfile.GateWayId}</customerPaymentProfileId>
+      <order>
+        <invoiceNumber></invoiceNumber>
+        <description>${order.Description}</description>
+        <purchaseOrderNumber></purchaseOrderNumber>
+      </order>
+      </profileTransAuthOnly>
+  </transaction>
+</createCustomerProfileTransactionRequest>
