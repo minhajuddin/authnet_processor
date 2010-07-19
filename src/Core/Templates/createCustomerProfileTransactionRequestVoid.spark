@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+#var transDictionary = (System.Collections.Generic.Dictionary<string,object>)Model;
+#var profile = (Authnet.IProfileAttributes)transDictionary["profile"];
+#var paymentProfile = (Authnet.IPaymentProfileAttributes)transDictionary["paymentProfile"];
+#var transaction = (Authnet.ITransaction)transDictionary["transaction"];
+<createCustomerProfileTransactionRequest xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
+  <render partial="_authentication" />
+  <transaction>
+    <profileTransVoid>
+	  <customerProfileId>${profile.GateWayId}</customerProfileId>
+      <customerPaymentProfileId>${paymentProfile.GateWayId}</customerPaymentProfileId>
+      <transId>${transaction.GateWayId}</transId>
+    </profileTransVoid>
+  </transaction>
+</createCustomerProfileTransactionRequest>
