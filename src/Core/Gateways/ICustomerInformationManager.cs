@@ -11,5 +11,6 @@ namespace Authnet.Gateways {
         Response Delete(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes);
         Response Delete(IProfileAttributes profileAttributes, IAddressAttributes shippingAddressAttributes);
         Response Update(IProfileAttributes profileAttributes);
+        Response Update(IProfileAttributes profile, IAddressAttributes billingAddress, ICreditCardAttributes creditCardInfo, IPaymentProfileAttributes paymentProfileAttributes);
     }
 }

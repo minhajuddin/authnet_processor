@@ -86,7 +86,7 @@ namespace Tests.Integration.Templating {
     <customerPaymentProfileId>33333</customerPaymentProfileId>
   </paymentProfile>
   <validationMode>liveMode</validationMode>
-</updateCustomerPaymentProfileRequestt>
+</updateCustomerPaymentProfileRequest>
 ";
             Assert.AreEqual(expectedXml, result);
 

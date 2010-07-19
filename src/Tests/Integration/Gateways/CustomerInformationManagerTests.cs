@@ -247,7 +247,24 @@ namespace Tests.Integration.Gateways {
             var updateCustomerProfileresponse = cim.Update(_profileAttributes);
 
             Assert.IsTrue(updateCustomerProfileresponse.Success);
+        }
 
+        [Test]
+        public void CanUpdatePaymentProfile() {
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
+            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"];
+
+            _profileAttributes.CustomerId = _profileAttributes.CustomerId + "chg";
+            _profileAttributes.Email = "chg" + _profileAttributes.Email;
+
+            var updateProfileresponse = cim.Update(_profileAttributes, _addressAttributes, _creditCardAttributes, _paymentProfileAttributes);
+
+            Assert.IsTrue(updateProfileresponse.Success);
+            Assert.IsNotNullOrEmpty(updateProfileresponse.Params["validationDirectResponse"]);
         }
 
 
