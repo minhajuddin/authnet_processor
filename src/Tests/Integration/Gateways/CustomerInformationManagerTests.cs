@@ -19,7 +19,7 @@ namespace Tests.Integration.Gateways {
             _profileAttributes = ObjectMother.GetMockProfileAttributes(x =>
            {
                x.CustomerId = random.Next().ToString();
-               x.Email = "test2@cosmicvent.com";
+               x.Email = "test2@cv.com";
            });
 
             _addressAttributes = ObjectMother.GetMockAddressAttributes(x =>
@@ -232,6 +232,22 @@ namespace Tests.Integration.Gateways {
 
             var deleteShippingAddressResponse = cim.Delete(_profileAttributes, _addressAttributes);
             Assert.IsTrue(deleteShippingAddressResponse.Success);
+        }
+
+        [Test]
+        public void CanUpdateCustomerProfile() {
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+            _profileAttributes.CustomerId = _profileAttributes.CustomerId + "Chg";
+            _profileAttributes.Email = "Chg" + _profileAttributes.Email;
+
+            var updateCustomerProfileresponse = cim.Update(_profileAttributes);
+
+            Assert.IsTrue(updateCustomerProfileresponse.Success);
+
         }
 
 
