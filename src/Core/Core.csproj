@@ -103,6 +103,7 @@
     <None Include="Templates\getCustomerShippingAddressRequest.spark" />
     <None Include="Templates\updateCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\updateCustomerProfileRequest.spark" />
+    <None Include="Templates\updateCustomerShippingAddressRequest.spark" />
     <None Include="Templates\_authentication.spark" />
     <None Include="Templates\createCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileIds.spark" />

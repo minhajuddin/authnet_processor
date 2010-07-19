@@ -71,6 +71,7 @@
     <Compile Include="Integration\Templating\GetCustomerShippingAddressTemplateView.cs" />
     <Compile Include="Integration\Templating\UpdateCustomerPaymentProfileTemplateViewTests.cs" />
     <Compile Include="Integration\Templating\UpdateCustomerProfileTemplateViewTests.cs" />
+    <Compile Include="Integration\Templating\UpdateCustomerShippingAddressTemplateViewTests.cs" />
     <Compile Include="ObjectMother.cs" />
     <Compile Include="Integration\Templating\TemplateViewTests.cs" />
     <Compile Include="Integration\Templating\TemplateFactoryTests.cs" />

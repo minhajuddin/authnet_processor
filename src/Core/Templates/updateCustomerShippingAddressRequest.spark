@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+#var shipping = (System.Collections.Generic.Dictionary<string,object>)Model;
+#var profile = (Authnet.IProfileAttributes)shipping["profileAttributes"];
+#var shippingAddress = (Authnet.IAddressAttributes)shipping["shippingAddressAttributes"];
+<updateCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+  <render partial="_authentication" />
+  <customerProfileId>${profile.GateWayId}</customerProfileId>
+  <address>
+    <firstName>${shippingAddress.FirstName}</firstName>
+    <lastName>${shippingAddress.LastName}</lastName>
+    <company>${shippingAddress.Company}</company>
+    <address>${shippingAddress.Address}</address>
+    <city>${shippingAddress.City}</city>
+    <state>${shippingAddress.State}</state>
+    <zip>${shippingAddress.Zip}</zip>
+    <country>${shippingAddress.Country}</country>
+    <phoneNumber>${shippingAddress.PhoneNumber}</phoneNumber>
+    <faxNumber>${shippingAddress.FaxNumber}</faxNumber>
+    <customerAddressId>${shippingAddress.GateWayId}</customerAddressId>
+  </address>
+</updateCustomerShippingAddressRequest>
