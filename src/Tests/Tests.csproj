@@ -92,6 +92,7 @@
     <Compile Include="Unit\Parsers\GetCustomerShippingAddressParserTests.cs" />
     <Compile Include="Unit\Parsers\UpdateCustomerPaymentProfileParserTests.cs" />
     <Compile Include="Unit\Parsers\UpdateCustomerProfileParserTests.cs" />
+    <Compile Include="Unit\Parsers\UpdateCustomerShippingAddressParserTests.cs" />
     <Compile Include="Unit\ResponseTests.cs" />
   </ItemGroup>
   <ItemGroup>

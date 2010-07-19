@@ -83,6 +83,7 @@
     <Compile Include="Parsers\ParserBase.cs" />
     <Compile Include="Parsers\UpdateCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\UpdateCustomerProfileParser.cs" />
+    <Compile Include="Parsers\UpdateCustomerShippingAddressParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="Parsers\CreateCustomerProfileParser.cs" />
