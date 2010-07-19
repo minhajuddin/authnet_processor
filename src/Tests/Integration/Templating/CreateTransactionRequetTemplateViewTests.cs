@@ -164,10 +164,6 @@ namespace Tests.Integration.Templating {
 
             Assert.AreEqual(expectedXml, result);
         }
-
-
-
-
     }
 
 }
