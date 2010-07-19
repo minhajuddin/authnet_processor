@@ -22,7 +22,7 @@ namespace Tests.Integration.Templating {
                 x.Email = "test2@cosmicvent.com";
             });
 
-            _addressAttributes = ObjectMother.GetMockIAddressAttributes(x =>
+            _addressAttributes = ObjectMother.GetMockAddressAttributes(x =>
             {
                 x.FirstName = "Rafi";
                 x.LastName = "Sk";

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+#var profile = (Authnet.IProfileAttributes) Model;
+<updateCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+  <render partial="_authentication" />
+  <profile>
+    <merchantCustomerId>${profile.Email}</merchantCustomerId>
+    <description>${profile.CustomerId}</description>
+    <email>${profile.Email}</email>
+    <customerProfileId>${profile.GateWayId}</customerProfileId>
+  </profile>
+</updateCustomerProfileRequest>

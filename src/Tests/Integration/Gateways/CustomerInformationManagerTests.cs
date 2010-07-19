@@ -22,7 +22,7 @@ namespace Tests.Integration.Gateways {
                x.Email = "test2@cosmicvent.com";
            });
 
-            _addressAttributes = ObjectMother.GetMockIAddressAttributes(x =>
+            _addressAttributes = ObjectMother.GetMockAddressAttributes(x =>
             {
                 x.FirstName = "Rafi";
                 x.LastName = "Sk";
@@ -216,6 +216,25 @@ namespace Tests.Integration.Gateways {
             var deletePaymentProfileResponse = cim.Delete(_profileAttributes, _paymentProfileAttributes);
             Assert.IsTrue(deletePaymentProfileResponse.Success);
         }
+
+
+        [Test]
+        public void CanShippingAddressProfile() {
+
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+            var createShippingAddressResponse = cim.Create(_profileAttributes, _addressAttributes);
+
+            _addressAttributes.GateWayId = createShippingAddressResponse.Params["customerAddressId"];
+
+            var deleteShippingAddressResponse = cim.Delete(_profileAttributes, _addressAttributes);
+            Assert.IsTrue(deleteShippingAddressResponse.Success);
+        }
+
+
 
     }
 }

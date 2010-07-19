@@ -18,7 +18,7 @@ namespace Tests.Integration.Templating {
                 x.GateWayId = "10000";
             });
 
-            _addressAttributes = ObjectMother.GetMockIAddressAttributes(x =>
+            _addressAttributes = ObjectMother.GetMockAddressAttributes(x =>
             {
                 x.FirstName = "Rafi";
                 x.LastName = "Sk";

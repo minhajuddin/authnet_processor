@@ -22,7 +22,7 @@ namespace Tests {
             return GetMock(constructor);
         }
 
-        public static IAddressAttributes GetMockIAddressAttributes(Action<IAddressAttributes> constructor) {
+        public static IAddressAttributes GetMockAddressAttributes(Action<IAddressAttributes> constructor) {
             return GetMock(constructor);
         }
 

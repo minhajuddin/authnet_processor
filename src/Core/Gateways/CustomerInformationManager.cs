@@ -72,6 +72,13 @@ namespace Authnet.Gateways {
             return GetResponse(deletepaymentProfileAttributes, "deleteCustomerPaymentProfileRequest.spark", new DeleteCustomerPaymentProfileParser());
         }
 
+        public Response Delete(IProfileAttributes profileAttributes, IAddressAttributes shippingAddressAttributes) {
+            var deleteshippingAddressAttributes = new Dictionary<string, object>();
+            deleteshippingAddressAttributes.Add("profileAttributes", profileAttributes);
+            deleteshippingAddressAttributes.Add("shippingAddressAttributes", shippingAddressAttributes);
+            return GetResponse(deleteshippingAddressAttributes, "deleteCustomerShippingAddressRequest.spark", new DeleteCustomerPaymentProfileParser());
+        }
+
         //public Response Create(IAddressAttributes shippingAddress,IProfileAttributes profileAttributes) {
 
         //    return GetResponse(shippingAddress, "createCustomerPaymentProfileRequest.spark", new CreateCustomerPaymentProfileParser());

@@ -76,10 +76,12 @@
     <Compile Include="Parsers\CreateCustomerShippingAddressParser.cs" />
     <Compile Include="Parsers\DeleteCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\DeleteCustomerProfileParser.cs" />
+    <Compile Include="Parsers\DleteCustomerShippingAddressParser.cs" />
     <Compile Include="Parsers\GetCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\GetCustomerProfileParser.cs" />
     <Compile Include="Parsers\GetCustomerShippingAddressParser.cs" />
     <Compile Include="Parsers\ParserBase.cs" />
+    <Compile Include="Parsers\UpdateCustomerProfileParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="Parsers\CreateCustomerProfileParser.cs" />
@@ -94,9 +96,11 @@
     <None Include="Templates\createCustomerShippingAddressRequest.spark" />
     <None Include="Templates\deleteCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\deleteCustomerProfileRequest.spark" />
+    <None Include="Templates\deleteCustomerShippingAddressRequest.spark" />
     <None Include="Templates\getCustomerPaymentProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerShippingAddressRequest.spark" />
+    <None Include="Templates\updateCustomerProfileRequest.spark" />
     <None Include="Templates\_authentication.spark" />
     <None Include="Templates\createCustomerProfileRequest.spark" />
     <None Include="Templates\getCustomerProfileIds.spark" />
