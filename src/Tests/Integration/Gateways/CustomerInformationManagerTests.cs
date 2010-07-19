@@ -267,6 +267,22 @@ namespace Tests.Integration.Gateways {
             Assert.IsNotNullOrEmpty(updateProfileresponse.Params["validationDirectResponse"]);
         }
 
+        [Test]
+        public void CanUpdateCustomerShippingAddress() {
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+
+            var createProfileResponse = cim.Create(_profileAttributes);
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+            var createShippingAddressResponse = cim.Create(_profileAttributes, _addressAttributes);
+
+            _addressAttributes.GateWayId = createShippingAddressResponse.Params["customerAddressId"];
+
+            var response = cim.Update(_profileAttributes, _addressAttributes);
+            Assert.IsTrue(response.Success);
+
+        }
+
 
 
     }

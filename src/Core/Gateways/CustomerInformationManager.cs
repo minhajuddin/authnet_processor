@@ -92,6 +92,14 @@ namespace Authnet.Gateways {
             return GetResponse(updatePaymentProfileAttributes, "updateCustomerPaymentProfileRequest.spark", new UpdateCustomerPaymentProfileParser());
         }
 
+        public Response Update(IProfileAttributes profile, IAddressAttributes shippingAddress) {
+            var shippingAddressAttributes = new Dictionary<string, object>();
+            shippingAddressAttributes.Add("profileAttributes", profile);
+            shippingAddressAttributes.Add("shippingAddressAttributes", shippingAddress);
+
+            return GetResponse(shippingAddressAttributes, "updateCustomerShippingAddressRequest.spark", new UpdateCustomerShippingAddressParser());
+        }
+
         //public Response Create(IAddressAttributes shippingAddress,IProfileAttributes profileAttributes) {
 
         //    return GetResponse(shippingAddress, "createCustomerPaymentProfileRequest.spark", new CreateCustomerPaymentProfileParser());
