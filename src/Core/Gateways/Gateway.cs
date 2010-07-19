@@ -10,6 +10,8 @@ namespace Authnet.Gateways {
             : base(templateFactory, authentication) {
         }
 
+        //create a Charge method which will do only authcatpure
+        //change ITransaction to TransactionType and make it protected
         public Response Charge(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, IOrder order, ITransaction transaction) {
             var chargeAttributes = new Dictionary<string, object>();
             chargeAttributes.Add("profile", profileAttributes);
