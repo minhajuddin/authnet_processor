@@ -3,7 +3,7 @@
 <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
   <render partial="_authentication" />
   <profile>
-    <merchantCustomerId>${customer.Email}</merchantCustomerId>
+    <merchantCustomerId>${customer.CustomerId}</merchantCustomerId>
     <description>${customer.CustomerId}</description>
     <email>${customer.Email}</email>
   </profile>

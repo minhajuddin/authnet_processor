@@ -26,8 +26,10 @@ namespace Tests.Unit.Parsers {
 
             Assert.AreEqual(true, response.Success);
             Assert.AreEqual("Successful.", response.Message);
-            Assert.IsNotNullOrEmpty(response.Params["directResponse"].ToString());
-
+            Assert.IsNotNullOrEmpty(response.Params["directResponseString"].ToString());
+            Assert.AreEqual("auth_capture", response.Params["directResponseHash"]["TransactionType"].ToString());
+            Assert.AreEqual("10.95", response.Params["directResponseHash"]["Amount"].ToString());
+            Assert.AreEqual("2000000001", response.Params["directResponseHash"]["PaymentGatewayTransactionId"].ToString());
         }
     }
 }

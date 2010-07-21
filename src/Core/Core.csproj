@@ -53,6 +53,7 @@
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Exceptions\ResponseException.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\StringExtentionMethods.cs" />
     <Compile Include="GatewayBase.cs" />
     <Compile Include="Gateways\CustomerInformationManager.cs" />
     <Compile Include="Gateways\Gateway.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Parsers\CreateCustomerShippingAddressParser.cs" />
     <Compile Include="Parsers\DeleteCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\DeleteCustomerProfileParser.cs" />
+    <Compile Include="Parsers\DirectResponseParser.cs" />
     <Compile Include="Parsers\DleteCustomerShippingAddressParser.cs" />
     <Compile Include="Parsers\GetCustomerPaymentProfileParser.cs" />
     <Compile Include="Parsers\GetCustomerProfileParser.cs" />
