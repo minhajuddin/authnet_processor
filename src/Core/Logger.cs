@@ -1,6 +1,6 @@
 ﻿using System;
 namespace Authnet {
-    internal static class Logger {
+    public static class Logger {
         static ILogger _logger = new ConsoleLogger();
 
         public static void Set( ILogger logger ) {
