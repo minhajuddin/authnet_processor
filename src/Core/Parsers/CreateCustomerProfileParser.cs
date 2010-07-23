@@ -6,10 +6,19 @@ namespace Authnet.Parsers {
 
         public Response Parse(string rawXml) {
 
-            var doc = XDocument.Parse(rawXml);
-            var root = doc.Descendants(_namespace + "createCustomerProfileResponse");
+            _doc = XDocument.Parse(rawXml);
+            var root = _doc.Descendants(_namespace + "createCustomerProfileResponse");
             var response = GetBasicResponse(root);
-            response.Params["customerProfileId"] = root.Descendants(_namespace + "customerProfileId").First().Value;
+
+            if (response.Success) {
+                response.Params["customerProfileId"] = root.Descendants(_namespace + "customerProfileId").First().Value;
+            }
+            if (response.Code == "E00027") {
+
+                response.Params["validationDirectResponseString"] = root.Descendants(_namespace + "validationDirectResponse").First().Value;
+                response.Params["validationDirectResponseHash"] = DirectResponseParser.Parse(response.Params["validationDirectResponseString"]);
+
+            }
 
             return response;
         }

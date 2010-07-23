@@ -4,9 +4,15 @@ using NUnit.Framework;
 namespace Tests.Unit.Parsers {
     [TestFixture]
     public class CreateCustomerProfileParserTests {
+        private CreateCustomerProfileParser parser;
+        [SetUp]
+        public void setup() {
+            parser = new CreateCustomerProfileParser();
+        }
+
         [Test]
-        public void CanParser() {
-            var parser = new CreateCustomerProfileParser();
+        public void CanParserSuccessResponse() {
+
 
             var rawXml = @"<?xml version='1.0' encoding='utf-8'?>
                            <createCustomerProfileResponse xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
@@ -27,7 +33,31 @@ namespace Tests.Unit.Parsers {
 
             Assert.AreEqual(true, response.Success);
             Assert.AreEqual("Successful.", response.Message);
+            Assert.AreEqual("I00001", response.Code);
             Assert.AreEqual("10000", response.Params["customerProfileId"].ToString());
+        }
+
+        [Test]
+        public void CanParseUnSuccessResponse() {
+
+            var rawXml = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<createCustomerProfileResponse xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">
+  <messages>
+    <resultCode>Error</resultCode>
+    <message>
+      <code>E00044</code>
+      <text>Customer Information Manager is not enabled.</text>
+    </message>
+  </messages>
+</createCustomerProfileResponse>";
+
+            var response = parser.Parse(rawXml);
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual("Customer Information Manager is not enabled.", response.Message);
+            Assert.AreEqual("E00044", response.Code);
+            Assert.AreEqual("NO VALUE",response.Params.ToString());
+
         }
     }
 }

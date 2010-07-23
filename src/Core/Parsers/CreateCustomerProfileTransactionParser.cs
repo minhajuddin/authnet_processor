@@ -8,8 +8,12 @@ namespace Authnet.Parsers {
             var doc = XDocument.Parse(rawXml);
             var root = doc.Descendants(_namespace + "createCustomerProfileTransactionResponse");
             var response = GetBasicResponse(root);
-            response.Params["directResponseString"] = root.Descendants(_namespace + "directResponse").First().Value;
-            response.Params["directResponseHash"] = DirectResponseParser.Parse(response.Params["directResponseString"]);
+
+            if (response.Success || response.Code == "E00027") {
+                response.Params["directResponseString"] = root.Descendants(_namespace + "directResponse").First().Value;
+                response.Params["directResponseHash"] = DirectResponseParser.Parse(response.Params["directResponseString"]);
+            }
+
             return response;
         }
     }

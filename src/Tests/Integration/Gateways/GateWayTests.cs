@@ -74,7 +74,8 @@ namespace Tests.Integration.Gateways {
 
 
             Assert.IsTrue(createPaymentProfileTransactionResponse.Success);
-            Assert.NotNull(createPaymentProfileTransactionResponse.Params["directResponse"].ToString());
+            Assert.IsNotNull(createPaymentProfileTransactionResponse.Params["directResponseString"]);
+            Assert.IsNotNull(createPaymentProfileTransactionResponse.Params["directResponseHash"]);
 
         }
 

@@ -25,7 +25,8 @@ namespace Authnet.Parsers {
             _ditectResponseHash["PaymentGatewayTransactionId"] = dataTokens[6];
             _ditectResponseHash["TransactionType"] = dataTokens[11];
             _ditectResponseHash["Amount"] = dataTokens[9];
-            
+            _ditectResponseHash["ResponseReasonText"] = dataTokens[3];
+
             //DirectResponse transaction = new DirectResponse
             //{
             //    ResponseCode = byte.Parse(dataTokens[0]),

@@ -1,6 +1,7 @@
 ﻿using System;
 using Authnet;
 using Authnet.Gateways;
+using Moq;
 using NUnit.Framework;
 
 namespace Tests.Integration.Gateways {
@@ -87,6 +88,21 @@ namespace Tests.Integration.Gateways {
             Assert.NotNull(response.Params["customerProfileId"]);
         }
 
+
+        [Test]
+        public void CanNotCreateCustomerProfileWithImproperInputData() {
+            var random = new Random();
+            var profileAttributes = ObjectMother.GetMockProfileAttributes(x =>
+            {
+                x.CustomerId = random.Next().ToString() + "...blahbalhbalhbalhbalhbalh";
+                x.Email = "test2@cosmicvent.com";
+            });
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var response = cim.Create(profileAttributes);
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual("NO VALUE", response.Params.ToString());
+        }
+
         [Test]
         public void CanCreatePaymentProfile() {
             var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
@@ -99,6 +115,20 @@ namespace Tests.Integration.Gateways {
             Assert.IsTrue(createPaymentProfileResponse.Success);
             Assert.NotNull(createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString());
         }
+
+        [Test]
+        public void CanNotCreatePaymentProfileWithImproperInputData() {
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, new Mock<IAddressAttributes>().Object, _creditCardAttributes);
+
+            Assert.IsFalse(createPaymentProfileResponse.Success);
+            Assert.IsNotNull(createPaymentProfileResponse.Params["validationDirectResponseString"]);
+        }
+
 
 
         [Test]
