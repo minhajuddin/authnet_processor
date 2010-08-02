@@ -11,7 +11,7 @@
       <amount>${order.Amount}</amount>
       <customerProfileId>${profile.GateWayId}</customerProfileId>
       <customerPaymentProfileId>${paymentProfile.GateWayId}</customerPaymentProfileId>
-      <creditCardNumberMasked>XXXX1111</creditCardNumberMasked>
+      <creditCardNumberMasked>${paymentProfile.MaskedCreditCard}</creditCardNumberMasked>
       <order>
         <invoiceNumber></invoiceNumber>
         <description>${order.Description}</description>

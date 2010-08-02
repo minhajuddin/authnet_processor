@@ -70,6 +70,7 @@ namespace Tests.Integration.Gateways {
 
             var gateway = new Gateway(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
 
+
             var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order);
 
 
@@ -77,6 +78,38 @@ namespace Tests.Integration.Gateways {
             Assert.IsNotNull(createPaymentProfileTransactionResponse.Params["directResponseString"]);
             Assert.IsNotNull(createPaymentProfileTransactionResponse.Params["directResponseHash"]);
 
+        }
+
+
+        [Test]
+
+        public void CanRefund() {
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
+
+
+            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString();
+            _paymentProfileAttributes.MaskedCreditCard = "XXXX" +
+                _creditCardAttributes.CardNumber.Trim().Substring(_creditCardAttributes.CardNumber.Trim().Length - 4);
+
+
+            var gateway = new Gateway(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+
+            var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order);
+
+            _transaction.GateWayId = createPaymentProfileTransactionResponse.Params["directResponseHash"]["PaymentGatewayTransactionId"];
+            _order.Amount -= 100;
+
+            Response refundResponse = gateway.Refund(_profileAttributes, _paymentProfileAttributes, _order, _transaction);
+
+            Assert.IsTrue(refundResponse.Success);
+            Assert.IsNotNull(refundResponse.Params["directResponseString"]);
+            Assert.IsNotNull(refundResponse.Params["directResponseHash"]);
         }
 
 

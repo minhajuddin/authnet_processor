@@ -32,6 +32,5 @@ namespace Authnet.Parsers {
                                };
             return response;
         }
-
     }
 }

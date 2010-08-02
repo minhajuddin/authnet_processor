@@ -23,6 +23,7 @@ namespace Tests.Integration.Templating {
             _paymentProfileAttributes = ObjectMother.GetMockPaymentProfileAttributes(x =>
             {
                 x.GateWayId = "829831";
+                x.MaskedCreditCard = "XXXX3333";
             });
 
             _order = ObjectMother.GetMockOrder(x =>
@@ -149,16 +150,18 @@ namespace Tests.Integration.Templating {
     <transactionKey>48V258vr55AE8tcg</transactionKey>
   </merchantAuthentication>
   <transaction>
-    <profileTransCaptureOnly>
+    <profileTransRefund>
       <amount>100</amount>
       <customerProfileId>123215</customerProfileId>
       <customerPaymentProfileId>829831</customerPaymentProfileId>
+      <creditCardNumberMasked>XXXX3333</creditCardNumberMasked>
       <order>
         <invoiceNumber></invoiceNumber>
         <description>First Transaction</description>
         <purchaseOrderNumber></purchaseOrderNumber>
       </order>
-      </profileTransCaptureOnly>
+      <transId>9999999</transId>
+      </profileTransRefund>
   </transaction>
 </createCustomerProfileTransactionRequest>";
 
