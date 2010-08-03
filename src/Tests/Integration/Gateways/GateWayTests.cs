@@ -112,6 +112,36 @@ namespace Tests.Integration.Gateways {
             Assert.IsNotNull(refundResponse.Params["directResponseHash"]);
         }
 
+        [Test]
+        public void CanVoidATransaction() {
+            var cim = new CustomerInformationManager(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+            var createProfileResponse = cim.Create(_profileAttributes);
+
+            _profileAttributes.GateWayId = createProfileResponse.Params["customerProfileId"];
+
+
+            var createPaymentProfileResponse = cim.CreatePaymentProfile(_profileAttributes, _addressAttributes, _creditCardAttributes);
+
+
+            _paymentProfileAttributes.GateWayId = createPaymentProfileResponse.Params["customerPaymentProfileId"].ToString();
+            _paymentProfileAttributes.MaskedCreditCard = "XXXX" +
+                _creditCardAttributes.CardNumber.Trim().Substring(_creditCardAttributes.CardNumber.Trim().Length - 4);
+
+
+            var gateway = new Gateway(TestHelper.TemplateFactory, ObjectMother.TestAuthentication);
+
+            var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order);
+
+            _transaction.GateWayId = createPaymentProfileTransactionResponse.Params["directResponseHash"]["PaymentGatewayTransactionId"];
+
+
+            var voidResponse = gateway.Void(_profileAttributes, _paymentProfileAttributes, _transaction);
+
+            Assert.IsTrue(voidResponse.Success);
+            Assert.IsNotNull(voidResponse.Params["directResponseString"]);
+            Assert.IsNotNull(voidResponse.Params["directResponseHash"]);
+        }
+
 
         //[Test]
         //public void CanCreatePaymentProfileTransactionAuthCapture() {

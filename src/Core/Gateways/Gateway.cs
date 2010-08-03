@@ -30,8 +30,12 @@ namespace Authnet.Gateways {
             return GetResponse(refundAttributes, "createCustomerProfileTransactionRequestRefund.spark", new CreateCustomerProfileTransactionParser());
         }
 
-        public Response Void(ICustomer customer) {
-            throw new NotImplementedException();
+        public Response Void(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, ITransaction transaction) {
+            var voidAttributes = new Dictionary<string, object>();
+            voidAttributes.Add("profile", profileAttributes);
+            voidAttributes.Add("paymentProfile", paymentProfileAttributes);
+            voidAttributes.Add("transaction", transaction);
+            return GetResponse(voidAttributes, "createCustomerProfileTransactionRequestVoid.spark", new CreateCustomerProfileTransactionParser());
         }
     }
 }

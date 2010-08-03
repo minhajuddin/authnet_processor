@@ -167,6 +167,30 @@ namespace Tests.Integration.Templating {
 
             Assert.AreEqual(expectedXml, result);
         }
+
+
+        [Test]
+        public void RenderCreateTransactionRequestVoidTemplate() {
+            var factory = TestHelper.TemplateFactory;
+            var template = factory.GetInstance("createCustomerProfileTransactionRequestVoid.spark");
+            template.Authentication = ObjectMother.TestAuthentication;
+            var result = template.Render(_chargeAttributes);
+
+            var expectedXml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+<createCustomerProfileTransactionRequest xmlns=""AnetApi/xml/v1/schema/AnetApiSchema.xsd"">  <merchantAuthentication>
+    <name>54PB5egZ</name>
+    <transactionKey>48V258vr55AE8tcg</transactionKey>
+  </merchantAuthentication>
+  <transaction>
+    <profileTransVoid>
+	  <customerProfileId>123215</customerProfileId>
+      <customerPaymentProfileId>829831</customerPaymentProfileId>
+      <transId>9999999</transId>
+    </profileTransVoid>
+  </transaction>
+</createCustomerProfileTransactionRequest>";
+            Assert.AreEqual(expectedXml, result);
+        }
     }
 
 }
