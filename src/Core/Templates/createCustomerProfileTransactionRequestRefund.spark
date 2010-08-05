@@ -2,19 +2,19 @@
 #var transDictionary = (System.Collections.Generic.Dictionary<string,object>)Model;
 #var profile = (Authnet.IProfileAttributes)transDictionary["profile"];
 #var paymentProfile = (Authnet.IPaymentProfileAttributes)transDictionary["paymentProfile"];
-#var order = (Authnet.IOrder)transDictionary["order"];
+#var amount = (System.Decimal)transDictionary["amount"];
 #var transaction = (Authnet.ITransaction)transDictionary["transaction"];
 <createCustomerProfileTransactionRequest xmlns='AnetApi/xml/v1/schema/AnetApiSchema.xsd'>
   <render partial="_authentication" />
   <transaction>
     <profileTransRefund>
-      <amount>${order.Amount}</amount>
+      <amount>${amount}</amount>
       <customerProfileId>${profile.GateWayId}</customerProfileId>
       <customerPaymentProfileId>${paymentProfile.GateWayId}</customerPaymentProfileId>
       <creditCardNumberMasked>${paymentProfile.MaskedCreditCard}</creditCardNumberMasked>
       <order>
         <invoiceNumber></invoiceNumber>
-        <description>${order.Description}</description>
+        <description>refund</description>
         <purchaseOrderNumber></purchaseOrderNumber>
       </order>
       <transId>${transaction.GateWayId}</transId>

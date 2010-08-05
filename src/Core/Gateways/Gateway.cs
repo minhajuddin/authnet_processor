@@ -21,12 +21,12 @@ namespace Authnet.Gateways {
         }
 
 
-        public Response Refund(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, IOrder order, ITransaction transaction) {
+        public Response Refund(IProfileAttributes profileAttributes, IPaymentProfileAttributes paymentProfileAttributes, decimal amount, ITransaction transaction) {
             var refundAttributes = new Dictionary<string, object>();
             refundAttributes.Add("profile", profileAttributes);
             refundAttributes.Add("paymentProfile", paymentProfileAttributes);
-            refundAttributes.Add("order", order);
             refundAttributes.Add("transaction", transaction);
+            refundAttributes.Add("amount", amount);
             return GetResponse(refundAttributes, "createCustomerProfileTransactionRequestRefund.spark", new CreateCustomerProfileTransactionParser());
         }
 

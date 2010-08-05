@@ -41,6 +41,7 @@ namespace Tests.Integration.Templating {
             _chargeAttributes.Add("paymentProfile", _paymentProfileAttributes);
             _chargeAttributes.Add("order", _order);
             _chargeAttributes.Add("transaction", _transaction);
+            _chargeAttributes.Add("amount",(decimal)100);
 
         }
 
@@ -157,7 +158,7 @@ namespace Tests.Integration.Templating {
       <creditCardNumberMasked>XXXX3333</creditCardNumberMasked>
       <order>
         <invoiceNumber></invoiceNumber>
-        <description>First Transaction</description>
+        <description>refund</description>
         <purchaseOrderNumber></purchaseOrderNumber>
       </order>
       <transId>9999999</transId>

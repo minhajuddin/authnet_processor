@@ -103,9 +103,9 @@ namespace Tests.Integration.Gateways {
             var createPaymentProfileTransactionResponse = gateway.Charge(_profileAttributes, _paymentProfileAttributes, _order);
 
             _transaction.GateWayId = createPaymentProfileTransactionResponse.Params["directResponseHash"]["PaymentGatewayTransactionId"];
-            _order.Amount -= 100;
+            
 
-            Response refundResponse = gateway.Refund(_profileAttributes, _paymentProfileAttributes, _order, _transaction);
+            Response refundResponse = gateway.Refund(_profileAttributes, _paymentProfileAttributes, (decimal)100, _transaction);
 
             Assert.IsTrue(refundResponse.Success);
             Assert.IsNotNull(refundResponse.Params["directResponseString"]);
