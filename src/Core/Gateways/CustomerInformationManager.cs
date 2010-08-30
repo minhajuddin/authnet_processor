@@ -13,7 +13,7 @@ namespace Authnet.Gateways {
 
         // GetCustomerProfileIds
         public long[] GetCustomerProfileIds() {
-            var connection = new Connection(_url);
+            var connection = new Connection(_authentication.ApiUrl);
 
             var template = _templateFactory.GetInstance("getCustomerProfileIds.spark");
 

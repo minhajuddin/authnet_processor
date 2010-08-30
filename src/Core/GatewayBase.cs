@@ -5,7 +5,7 @@ using Authnet.Templating;
 
 namespace Authnet {
     public abstract class GatewayBase {
-        protected string _url = "https://apitest.authorize.net/xml/v1/request.api";
+        //  protected string _url = "https://apitest.authorize.net/xml/v1/request.api";
         protected TemplateFactory _templateFactory;
         protected Authentication _authentication;
 
@@ -15,7 +15,7 @@ namespace Authnet {
         }
 
         public Response GetResponse(object data, string templateName, IParser parser) {
-            var connection = new Connection(_url);
+            var connection = new Connection(_authentication.ApiUrl);
             var template = _templateFactory.GetInstance(templateName);
             template.Authentication = _authentication;
             var requestBody = template.Render(data);
